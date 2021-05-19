@@ -8,7 +8,6 @@ test('No number', t => {
 })
 
 test('One word agrees with one number', t => {
-  t.is(templural`Yoann and Valentin had ${0} interesting idea{s}`, 'Yoann and Valentin had 0 interesting idea')
   t.is(templural`Yoann and Valentin had ${1} interesting idea{s}`, 'Yoann and Valentin had 1 interesting idea')
   t.is(templural`Yoann and Valentin had ${2} interesting idea{s}`, 'Yoann and Valentin had 2 interesting ideas')
   t.is(templural`Yoann and Valentin had ${42} interesting idea{s}`, 'Yoann and Valentin had 42 interesting ideas')
@@ -38,4 +37,9 @@ test('Several words agree with several numbers', t => {
   t.is(templural`${2} dog{s} bark{s:} and ${1} cat{s} meow{s:}`, '2 dogs bark and 1 cat meows')
   t.is(templural`${1} dog{s} bark{s:} and ${2} cat{s} meow{s:}`, '1 dog barks and 2 cats meow')
   t.is(templural`${2} dog{s} bark{s:} and ${2} cat{s} meow{s:}`, '2 dogs bark and 2 cats meow')
+})
+
+test('Some words agree with and preceed a number', t => {
+  t.is(templural`There {$1:is only:are} ${1} dog{s} barking!`, 'There is only 1 dog barking!')
+  t.is(templural`There {$1:is only:are} ${2} dog{s} barking!`, 'There are 2 dogs barking!')
 })
