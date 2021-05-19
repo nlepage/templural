@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "ci": "yarn install --frozen-lockfile && yarn test",
     "test": "ava"
   },
   "devDependencies": {
