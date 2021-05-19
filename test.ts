@@ -43,3 +43,8 @@ test('Some words agree with and preceed a number', t => {
   t.is(templural`There {$1:is only:are} ${1} dog{s} barking!`, 'There is only 1 dog barking!')
   t.is(templural`There {$1:is only:are} ${2} dog{s} barking!`, 'There are 2 dogs barking!')
 })
+
+test('The actual number is replaced by words', t => {
+  t.is(templural`You received {${1}:a:too many} message{s}.`, 'You received a message.')
+  t.is(templural`You received {${2}:a:too many} message{s}.`, 'You received too many messages.')
+})
