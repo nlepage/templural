@@ -2,6 +2,11 @@ import test from 'ava'
 
 import templural from './src'
 
+test('No number', t => {
+  t.is(templural`This is useless`, 'This is useless')
+  t.is(templural`This is a test{s}`, 'This is a test')
+})
+
 test('One word agrees with one number', t => {
   t.is(templural`Yoann and Valentin had ${0} interesting idea{s}`, 'Yoann and Valentin had 0 interesting idea')
   t.is(templural`Yoann and Valentin had ${1} interesting idea{s}`, 'Yoann and Valentin had 1 interesting idea')
