@@ -34,9 +34,8 @@ export default function templural(chunks: TemplateStringsArray, ...args: number[
       return plural ? split[1] : split[0]
     })
 
-    // FIXME also check it's not the last chunk
-    // using chunk and not next is intentional
-    if (chunk.endsWith('{')) {
+    // using chunk.endsWith() and not next.endsWith() is intentional
+    if (i < chunks.length - 1 && chunk.endsWith('{')) {
       next = next.slice(0, -1)
       inCurlies = true
     }

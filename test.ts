@@ -8,6 +8,7 @@ test('No number', t => {
 })
 
 test('One word agrees with one number', t => {
+  t.is(templural`Yoann and Valentin had ${0} interesting idea{s}`, 'Yoann and Valentin had 0 interesting idea')
   t.is(templural`Yoann and Valentin had ${1} interesting idea{s}`, 'Yoann and Valentin had 1 interesting idea')
   t.is(templural`Yoann and Valentin had ${2} interesting idea{s}`, 'Yoann and Valentin had 2 interesting ideas')
   t.is(templural`Yoann and Valentin had ${42} interesting idea{s}`, 'Yoann and Valentin had 42 interesting ideas')
@@ -40,11 +41,21 @@ test('Several words agree with several numbers', t => {
 })
 
 test('Some words agree with and preceed a number', t => {
-  t.is(templural`There {$1:is only:are} ${1} dog{s} barking!`, 'There is only 1 dog barking!')
-  t.is(templural`There {$1:is only:are} ${2} dog{s} barking!`, 'There are 2 dogs barking!')
+  t.is(templural`There {$1:is:are} ${1} barking dog{s}`, 'There is 1 barking dog')
+  t.is(templural`There {$1:is:are} ${2} barking dog{s}`, 'There are 2 barking dogs')
 })
 
 test('The actual number is replaced by words', t => {
-  t.is(templural`You received {${1}:a:too many} message{s}.`, 'You received a message.')
-  t.is(templural`You received {${2}:a:too many} message{s}.`, 'You received too many messages.')
+  t.is(templural`You have {${1}:a:several} message{s}`, 'You have a message')
+  t.is(templural`You have {${2}:a:several} message{s}`, 'You have several messages')
+})
+
+test.failing('The actual number is replaced by words (improved)', t => {
+  t.is(templural`You have {${0}:no:a:several} message{s}`, 'You have no message')
+  t.is(templural`You have {${1}:no:a:several} message{s}`, 'You have a message')
+  t.is(templural`You have {${86}:no:a:several} message{s}`, 'You have 86 messages')
+})
+
+test('Ending left curly must not disappear', t => {
+  t.is(templural`Please don't eat the curly {`, "Please don't eat the curly {")
 })
