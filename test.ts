@@ -26,3 +26,9 @@ test('Several words each agree with one word', t => {
   t.is(templural`I bought ${2} carrot{s} and ${1} potato{es}`, 'I bought 2 carrots and 1 potato')
   t.is(templural`I bought ${2} carrot{s} and ${3} potato{es}`, 'I bought 2 carrots and 3 potatoes')
 })
+
+test('The singular of a word is not a prefix of the plural', t => {
+  t.is(templural`${1} {person:people} {is:are} connected`, '1 person is connected')
+  t.is(templural`${2} {person:people} {is:are} connected`, '2 people are connected')
+  t.is(templural`${666} {person:people} {is:are} connected`, '666 people are connected')
+})
