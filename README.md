@@ -6,9 +6,11 @@
 [![Version](https://img.shields.io/npm/v/templural.svg)](https://www.npmjs.com/package/templural)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache2.0-yellow.svg)](https://spdx.org/licenses/Apache-2.0.html)
 
+[🇫🇷 README en français](https://github.com/nlepage/templural/blob/main/README_fr.md)
+
 ## Usage
 
-## Install
+### Install
 
 ```sh
 yarn add templural
@@ -56,7 +58,7 @@ templural`I just had ${nbPints} bear{s} darling{s}, I swear{s}`
 // nbPints = 6 ➔ "I just had 6 bears darlings, I swears"
 ```
 
-### Match several words each to a different preceding
+### Match several words each to a different preceding number
 
 ```js
 templural`I bought ${nbCarrots} carrot{s} and ${nbPotatoes} potato{es}`
