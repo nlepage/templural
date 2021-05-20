@@ -50,10 +50,15 @@ test('The actual number is replaced by words', t => {
   t.is(templural`You have {${2}:a:several} message{s}`, 'You have several messages')
 })
 
-test.failing('The actual number is replaced by words (improved)', t => {
+test.failing('Choose a different word when the number is zero', t => {
   t.is(templural`You have {${0}:no:a:several} message{s}`, 'You have no message')
   t.is(templural`You have {${1}:no:a:several} message{s}`, 'You have a message')
-  t.is(templural`You have {${86}:no:a:several} message{s}`, 'You have 86 messages')
+  t.is(templural`You have {${86}:no:a:several} message{s}`, 'You have several messages')
+})
+
+test.failing('The actual number is sometimes replaced by words', t => {
+  t.is(templural`You have {${1}:a:$1} message{s}`, 'You have a message')
+  t.is(templural`You have {${86}:a:$1} message{s}`, 'You have 86 messages')
 })
 
 test('Ending left curly must not disappear', t => {
