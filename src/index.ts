@@ -5,17 +5,7 @@ export default function templural(chunks: TemplateStringsArray, ...args: number[
     let next = chunk
 
     if (inCurlies) {
-      next = next.replace(/^:(.*?)}/, (_match, g1) => {
-        const singular = args[i - 1] <= 1
-        const split = g1.split(':')
-
-        if (split.length === 1) return singular ?  '':g1
-
-        if (split.length === 2) return singular ? split[0] : split[1]
-
-        if (singular) return args[i - 1] === 0 ? split[0] : split[1]
-        return split[2]
-      })
+      next = next.replace(/^:(.*?)}/, (_match, g1) => resolve(args, i - 1, g1.split(':')))
 
       inCurlies = false
     } else {
@@ -23,18 +13,16 @@ export default function templural(chunks: TemplateStringsArray, ...args: number[
     }
 
     next = next.replace(/\{(.*?)\}/g, (_match, g1) => {
-      let plural = args[i - 1] > 1
+      let index = i - 1
       let split = g1.split(':')
 
       const indexMatch = /^\$(\d)+$/.exec(split[0])
       if (indexMatch != null) {
-        plural = args[Number(indexMatch[1]) - 1] > 1
+        index = Number(indexMatch[1]) - 1
         split = split.slice(1)
       }
 
-      if (split.length === 1) return plural ? g1 : ''
-
-      return plural ? split[1] : split[0]
+      return resolve(args, index, split)
     })
 
     // using chunk.endsWith() and not next.endsWith() is intentional
@@ -45,4 +33,15 @@ export default function templural(chunks: TemplateStringsArray, ...args: number[
     
     return prev + next
   }, '')
+}
+
+function resolve(args: number[], index: number, split: string[]): string {
+  const singular = index === -1 || args[index] <= 1
+
+  if (split.length === 1) return singular ? '' : split[0]
+
+  if (split.length === 2) return singular ? split[0] : split[1]
+
+  if (singular) return args[index] === 0 ? split[0] : split[1]
+  return split[2]
 }
