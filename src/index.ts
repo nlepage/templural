@@ -6,12 +6,15 @@ export default function templural(chunks: TemplateStringsArray, ...args: number[
 
     if (inCurlies) {
       next = next.replace(/^:(.*?)}/, (_match, g1) => {
-        const plural = args[i - 1] > 1
+        const singular = args[i - 1] <= 1
         const split = g1.split(':')
 
-        if (split.length === 1) return plural ? g1 : ''
+        if (split.length === 1) return singular ?  '':g1
 
-        return plural ? split[1] : split[0]
+        if (split.length === 2) return singular ? split[0] : split[1]
+
+        if (singular) return args[i - 1] === 0 ? split[0] : split[1]
+        return split[2]
       })
 
       inCurlies = false
