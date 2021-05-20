@@ -56,7 +56,7 @@ test('Choose a different word when the number is zero', t => {
   t.is(templural`You have {${86}:no:a:several} message{s}`, 'You have several messages')
 })
 
-test.failing('The actual number is replaced by words in certain cases', t => {
+test('The actual number is replaced by words in certain cases', t => {
   t.is(templural`You have {${1}:a:$1} message{s}`, 'You have a message')
   t.is(templural`You have {${86}:a:$1} message{s}`, 'You have 86 messages')
 })
