@@ -1,4 +1,4 @@
-export default function templural(chunks: TemplateStringsArray, ...args: number[]): string {
+export default function templural(chunks: TemplateStringsArray, ...args: any[]): string {
   let inCurlies = false
 
   return chunks.reduce((prev, chunk, i) => {
@@ -9,7 +9,7 @@ export default function templural(chunks: TemplateStringsArray, ...args: number[
 
       inCurlies = false
     } else {
-      if (i > 0) next = args[i - 1] + next
+      if (i > 0) next = toString(args[i - 1]) + next
     }
 
     next = next.replace(/\{(.*?)\}/g, (_match, g1) => {
@@ -35,12 +35,12 @@ export default function templural(chunks: TemplateStringsArray, ...args: number[
   }, '')
 }
 
-function resolve(split: string[], args: number[], index: number): string {
+function resolve(split: string[], args: any[], index: number): string {
   return resolveArgRef(resolveSplit(split, args, index), args)
 }
 
-function resolveSplit(split: string[], args: number[], index: number): string {
-  const singular = index === -1 || args[index] <= 1
+function resolveSplit(split: string[], args: any[], index: number): string {
+  const singular = index === -1 || typeof args[index] !== 'number' || args[index] <= 1
 
   if (split.length === 1) return singular ? '' : split[0]
 
@@ -50,7 +50,11 @@ function resolveSplit(split: string[], args: number[], index: number): string {
   return split[2]
 }
 
-function resolveArgRef(s: string, args: number[]): string {
+function resolveArgRef(s: string, args: any[]): string {
   const argRefMatch = /^\$(\d+)$/.exec(s)
-  return argRefMatch ? args[parseInt(argRefMatch[1]) - 1]?.toString() : s
+  return argRefMatch ? toString(args[parseInt(argRefMatch[1]) - 1]) : s
+}
+
+function toString(v: any): string {
+  return v == null ? '' : v.toString()
 }

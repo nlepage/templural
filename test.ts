@@ -14,6 +14,12 @@ test('One word agrees with one number', t => {
   t.is(templural`Yoann and Valentin had ${42} interesting idea{s}`, 'Yoann and Valentin had 42 interesting ideas')
 })
 
+test('Some words are interpolated', t => {
+  const user = 'Mario'
+  t.is(templural`${user} has ${1} point{s}`, 'Mario has 1 point')
+  t.is(templural`${user} has ${1024} point{s}`, 'Mario has 1024 points')
+})
+
 test('Several words agree with one number', t => {
   t.is(templural`I just had ${1} bear{s} darling{s}, I swear{s}`, 'I just had 1 bear darling, I swear')
   t.is(templural`I just had ${2} bear{s} darling{s}, I swear{s}`, 'I just had 2 bears darlings, I swears')
