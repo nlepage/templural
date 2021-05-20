@@ -41,8 +41,8 @@ test('Several words agree with several numbers', t => {
 })
 
 test('Some words agree with and preceed a number', t => {
-  t.is(templural`There {$1:is:are} ${1} barking dog{s}`, 'There is 1 barking dog')
-  t.is(templural`There {$1:is:are} ${2} barking dog{s}`, 'There are 2 barking dogs')
+  t.is(templural`There {$1:is:are} ${1} flying whale{s}`, 'There is 1 flying whale')
+  t.is(templural`There {$1:is:are} ${2} flying whale{s}`, 'There are 2 flying whales')
 })
 
 test('The actual number is replaced by words', t => {
