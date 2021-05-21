@@ -6,7 +6,7 @@
 [![Version](https://img.shields.io/npm/v/templural.svg)](https://www.npmjs.com/package/templural)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache2.0-yellow.svg)](https://spdx.org/licenses/Apache-2.0.html)
 
-[🇬🇧 English README](https://github.com/nlepage/templural#readme)
+[![English README](https://img.shields.io/badge/🇬🇧-README-blue)](https://github.com/nlepage/templural#readme)
 
 ## Utilisation
 
