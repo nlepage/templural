@@ -1,6 +1,6 @@
 {
   "name": "templural",
-  "version": "0.0.0",
+  "version": "1.0.0-beta.1",
   "description": "🍤",
   "main": "dist/index.js",
   "repository": "https://github.com/nlepage/templural",
