@@ -96,13 +96,11 @@ templural`${nbChevaux} cheva{l:ux} {a:ont} ${nbChevaux} tête{s}, ${nbChevaux * 
 
 ### Accorder un mot avec un nombre *ne le précédant pas*
 
-*Cette exemple n'est pas traduit, vous avez une idée pour le traduire ? Faites une Pull Request !*
-
 ```js
-templural`There {$1:is:are} ${nbWhales} flying whale{s}`
+templural`Dans le ciel vole{$1:nt} ${nbWhales} baleine{s}`
 
-// nbWhales = 1 ➔ "There is 1 flying whale"
-// nbWhales = 2 ➔ "There are 2 flying whales"
+// nbWhales = 1 ➔ "Dans le ciel vole 1 baleine"
+// nbWhales = 2 ➔ "Dans le ciel volent 2 baleines"
 ```
 
 `$1` référence la première expression interpolée.
