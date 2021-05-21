@@ -9,6 +9,7 @@
     "url": "https://github.com/nlepage"
   },
   "license": "Apache-2.0",
+  "keywords": ["template-literals", "pluralize"],
   "files": [
     "src",
     "dist",
