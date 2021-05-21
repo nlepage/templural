@@ -1,6 +1,6 @@
 import test from 'ava'
 
-import templural from './src'
+import { templural } from './src'
 
 test('No number', t => {
   t.is(templural`This is useless`, 'This is useless')
