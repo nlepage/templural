@@ -42,7 +42,7 @@ templural`Yoann and Valentin had ${numberOfIdeas} interesting idea{s}`
 // numberOfIdeas = 1 ➔ "Yoann and Valentin had 1 interesting idea"
 // numberOfIdeas = 2 ➔ "Yoann and Valentin had 2 interesting ideas"
 // numberOfIdeas = 42 ➔ "Yoann and Valentin had 42 interesting ideas"
-// numberOfIdeas = 0 ➔ "Yoann and Valentin had 0 interesting idea"
+// numberOfIdeas = 0 ➔ "Yoann and Valentin had 0 interesting ideas"
 ```
 
 ### Insert any other values in the text
@@ -123,7 +123,7 @@ templural`You have {${nbMessages}:a:several} message{s}`
 ```js
 templural`You have {${nbMessages}:no:a:several} message{s}`
 
-// nbMessages = 0 ➔ "You have no message"
+// nbMessages = 0 ➔ "You have no messages"
 // nbMessages = 1 ➔ "You have a message"
 // nbMessages = 86 ➔ "You have several messages"
 ```

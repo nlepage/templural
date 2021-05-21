@@ -1,8 +1,10 @@
 import test from 'ava'
 
-import { templural } from '../src'
+import { templural, setLocales } from '../src'
 
-test.failing('Match a word to a preceding number', t => {
+test.before(() => setLocales('en'))
+
+test('Match a word to a preceding number', t => {
   t.is(templural`Yoann and Valentin had ${1} interesting idea{s}`, 'Yoann and Valentin had 1 interesting idea')
   t.is(templural`Yoann and Valentin had ${2} interesting idea{s}`, 'Yoann and Valentin had 2 interesting ideas')
   t.is(templural`Yoann and Valentin had ${42} interesting idea{s}`, 'Yoann and Valentin had 42 interesting ideas')
@@ -52,7 +54,7 @@ test('Replace numbers by text', t => {
 })
 
 test('Choose a different text when the number is zero', t => {
-  t.is(templural`You have {${0}:no:a:several} message{s}`, 'You have no message')
+  t.is(templural`You have {${0}:no:a:several} message{s}`, 'You have no messages')
   t.is(templural`You have {${1}:no:a:several} message{s}`, 'You have a message')
   t.is(templural`You have {${86}:no:a:several} message{s}`, 'You have several messages')
 })
