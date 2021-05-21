@@ -143,7 +143,7 @@ templural`You have {${nbMessages}:a:$1} message{s}`
 
 Not for the moment.
 
-templural is simple and dumb, and it will probably keep like this.
+templural is simple and dumb, and it will probably stay like this.
 
 ### What about negative or floating numbers?
 
