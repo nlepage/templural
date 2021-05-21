@@ -12,8 +12,7 @@
   "keywords": ["template-literals", "pluralize"],
   "files": [
     "src",
-    "dist",
-    "LICENSE"
+    "dist"
   ],
   "scripts": {
     "build": "tsc",
