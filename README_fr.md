@@ -80,9 +80,9 @@ templural`J'ai acheté ${nbCarottes} carotte{s} et ${nbPatates} patate{s}`
 ```js
 templural`${nbConnectes} personne{s} {est:sont} connecté{s}`
 
-// nbConnectes = 1 ➔ "1 personne est connecté"
-// nbConnectes = 2 ➔ "2 personnes sont connectés"
-// nbConnectes = 666 ➔ "666 personnes sont connectés"
+// nbConnectes = 1 ➔ "1 personne est connectée"
+// nbConnectes = 2 ➔ "2 personnes sont connectées"
+// nbConnectes = 666 ➔ "666 personnes sont connectées"
 ```
 
 ### Un mélange de tous les exemples précédents
@@ -112,7 +112,7 @@ templural`Dans le ciel vole{$1:nt} ${nbWhales} baleine{s}`
 ```js
 templural`Vous avez {${nbMessages}:un:plusieurs} message{s}`
 
-// nbMessages = 1 ➔ "Vous avez a message"
+// nbMessages = 1 ➔ "Vous avez un message"
 // nbMessages = 86 ➔ "Vous avez plusieurs messages"
 ```
 
