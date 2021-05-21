@@ -40,14 +40,14 @@ function resolve(split: string[], args: any[], index: number): string {
 }
 
 function resolveSplit(split: string[], args: any[], index: number): string {
-  const singular = index === -1 || typeof args[index] !== 'number' || args[index] <= 1
+  if (index === -1 || typeof args[index] !== 'number') return ''
 
-  if (split.length === 1) return singular ? '' : split[0]
+  const splitIndex = rules[split.length - 1].findIndex(({ range: [start, end] }) => args[index] >= start && args[index] < end)
 
-  if (split.length === 2) return singular ? split[0] : split[1]
+  if (splitIndex !== -1) return split[splitIndex]
 
-  if (singular) return args[index] === 0 ? split[0] : split[1]
-  return split[2]
+  // FIXME
+  return ''
 }
 
 function resolveArgRef(s: string, args: any[]): string {
@@ -58,3 +58,18 @@ function resolveArgRef(s: string, args: any[]): string {
 function toString(v: any): string {
   return v == null ? '' : v.toString()
 }
+
+const rules = [
+  [
+    { range: [2, Number.POSITIVE_INFINITY] },
+  ],
+  [
+    { range: [1, 2] },
+    { range: [2, Number.POSITIVE_INFINITY] },
+  ],
+  [
+    { range: [0, 1] },
+    { range: [1, 2] },
+    { range: [2, Number.POSITIVE_INFINITY] },
+  ],
+]
