@@ -25,7 +25,13 @@ npm install templural
 ### Importation
 
 ```js
-import templural from 'templural'
+import { templural } from 'templural'
+```
+
+ou
+
+```js
+const { templural } = require('templural')
 ```
 
 ### Accorder un mot avec nombre le précédant
@@ -90,6 +96,8 @@ templural`${nbChevaux} cheva{l:ux} {a:ont} ${nbChevaux} tête{s}, ${nbChevaux * 
 
 ### Accorder un mot avec un nombre *ne le précédant pas*
 
+*Cette exemple n'est pas traduit, vous avez une idée pour le traduire ? Faites une Pull Request !*
+
 ```js
 templural`There {$1:is:are} ${nbWhales} flying whale{s}`
 
@@ -99,7 +107,7 @@ templural`There {$1:is:are} ${nbWhales} flying whale{s}`
 
 `$1` référence la première expression interpolée.
 
- `$2`, `$3` ou `$n` peuvent être utilisé pour référencer la deuxième, troisième ou énième expression interpolée.
+`$2`, `$3` ou `$n` peuvent être utilisé pour référencer la deuxième, troisième ou énième expression interpolée.
 
 ### Remplacer un nombre par du texte
 

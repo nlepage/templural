@@ -25,7 +25,13 @@ npm install templural
 ### Import
 
 ```js
-import templural from 'templural'
+import { templural } from 'templural'
+```
+
+or
+
+```js
+const { templural } = require('templural')
 ```
 
 ### Match a word to a preceding number

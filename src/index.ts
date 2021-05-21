@@ -1,4 +1,4 @@
-export default function templural(chunks: TemplateStringsArray, ...args: any[]): string {
+export function templural(chunks: TemplateStringsArray, ...args: any[]): string {
   let inCurlies = false
 
   return chunks.reduce((prev, chunk, i) => {
