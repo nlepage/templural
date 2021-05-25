@@ -2,7 +2,7 @@ import test from 'ava'
 
 import { templural } from '../src'
 
-test.before(() => templural.setLocales('fr'))
+test.before(() => { templural.setLocales('fr') })
 
 test('Accorder un mot avec nombre le précédant', t => {
   t.is(templural`Yoann et Valentin ont eu ${1} idée{s}`, 'Yoann et Valentin ont eu 1 idée')

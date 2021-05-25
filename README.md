@@ -137,6 +137,12 @@ templural`You have {${nbMessages}:a:$1} message{s}`
 // nbMessages = 86 ➔ "You have 86 messages"
 ```
 
+## 🗣️ Internationalization
+
+templural is designed to be adaptable to any language.
+
+🚧 FIXME
+
 ## ❓ FAQ
 
 ### Any new features planned?
@@ -149,7 +155,7 @@ templural is simple and dumb, and it will probably stay like this.
 
 templural doesn't care about these.
 
-If a number is less than or equal to 1, the corresponding words will be in the singular.
+🚧 FIXME
 
 ### Any other questions?
 

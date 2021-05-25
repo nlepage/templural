@@ -2,7 +2,7 @@ import test from 'ava'
 
 import { templural } from '../src'
 
-test.before(() => templural.setLocales('en'))
+test.before(() => { templural.setLocales('en') })
 
 test('Match a word to a preceding number', t => {
   t.is(templural`Yoann and Valentin had ${1} interesting idea{s}`, 'Yoann and Valentin had 1 interesting idea')
