@@ -141,7 +141,41 @@ templural`You have {${nbMessages}:a:$1} message{s}`
 
 templural is designed to be adaptable to any language.
 
+### Configuring ranges
+
 🚧 FIXME
+
+### Plural rules
+
+templural uses [Intl.PulralRules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) to choose what to do when you don't specify it explicitly.
+
+For example, zero is plural in english whereas it is singular in french:
+
+```js
+templural.setLocales('en')
+templural`You have ${0} message{s}` // ➔ "You have 0 messages"
+
+templural.setLocales('fr')
+templural`Vous avez ${0} message{s}` // ➔ "Vous avez 0 message"
+```
+
+#### Setting locale
+
+It is possible to change the locale used by templural, either by setting the default locale:
+
+```js
+templural.setLocales('fr_BE') // French (Belgium)
+```
+
+or by creating en new template function dedicated to a locale:
+
+```js
+import { forLocales } from 'templural'
+
+const templuralDeCH = forLocales('de_CH') // German (Switzerland)
+```
+
+For more information about the values accepted by `templural.setLocales()` and `forLocales()` see [locales argument](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument).
 
 ## ❓ FAQ
 
@@ -152,8 +186,6 @@ Not for the moment.
 templural is simple and dumb, and it will probably stay like this.
 
 ### What about negative or floating numbers?
-
-templural doesn't care about these.
 
 🚧 FIXME
 
