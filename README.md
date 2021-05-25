@@ -141,9 +141,41 @@ templural`You have {${nbMessages}:a:$1} message{s}`
 
 templural is designed to be adaptable to any language.
 
-### Configuring ranges
+### Number ranges
 
-🚧 FIXME
+templural let's you define what to do using number ranges, from less to more explicit:
+
+```js
+templural`${n}{a}`
+// ➔ Chooses "a" if n >= 2
+
+templural`${n}{a:b}`
+// ➔ Chooses "a" if 1 <= n < 2
+// ➔ Chooses "b" if n >= 2
+
+templural`${n}{a:b:c}`
+// ➔ Chooses "a" if 0 <= n < 1
+// ➔ Chooses "b" if 1 <= n < 2
+// ➔ Chooses "c" if n >= 2
+```
+
+When using a less explicit form, templural uses [plural rules](#plural-rules) to choose what to do.
+
+It is possible to change the number ranges used by tempural, either by setting the default ranges:
+
+```js
+templural.setRanges(...)
+```
+
+or by creating a new template function with specific ranges:
+
+```js
+import { forRanges } from 'templural'
+
+const templuralCustom = forRanges(...)
+```
+
+The default ranges used by templural are defined in [`index.ts`](https://github.com/nlepage/templural/blob/ef1e75601049b545637ba8c2b4ce36ee3e8a6f18/src/index.ts#L8).
 
 ### Plural rules
 
@@ -176,7 +208,7 @@ It is possible to change the locale used by templural, either by setting the def
 templural.setLocales('fr_BE') // French (Belgium)
 ```
 
-or by creating en new template function dedicated to a locale:
+or by creating a new template function with a specific locale:
 
 ```js
 import { forLocales } from 'templural'
