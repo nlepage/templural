@@ -2,7 +2,8 @@
   "name": "templural",
   "version": "1.0.0-beta.2",
   "description": "🍤",
-  "main": "dist/index.js",
+  "main": "dist/cjs",
+  "module": "dist/es",
   "repository": "https://github.com/nlepage/templural",
   "author": {
     "name": "Nicolas LEPAGE",
@@ -15,8 +16,10 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig-cjs.json && tsc -p tsconfig-es.json",
     "ci": "yarn install --frozen-lockfile && yarn test",
+    "clean": "rm -rf dist",
+    "prebuild": "yarn clean",
     "test": "ava"
   },
   "devDependencies": {
