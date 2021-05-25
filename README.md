@@ -143,7 +143,7 @@ templural is designed to be adaptable to any language.
 
 ### Number ranges
 
-templural let's you define what to do using number ranges, from less to more explicit:
+templural uses number ranges to define what to do, from less to more explicit:
 
 ```js
 templural`${n}{a}`

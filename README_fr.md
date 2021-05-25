@@ -135,6 +135,87 @@ templural`Vous avez {${nbMessages}:un:$1} message{s}`
 // nbMessages = 86 ➔ "Vous avez 86 messages"
 ```
 
+## 🗣️ Internationalisation
+
+templural est conçu pour être adaptable à n'importe quelle langue.
+
+### Number ranges
+
+templural utilise des plages de nombres pour définir quoi faire, du moins au plus explicite :
+
+```js
+templural`${n}{a}`
+// ➔ Choisit "a" si n >= 2
+
+templural`${n}{a:b}`
+// ➔ Choisit "a" si 1 <= n < 2
+// ➔ Choisit "b" si n >= 2
+
+templural`${n}{a:b:c}`
+// ➔ Choisit "a" si 0 <= n < 1
+// ➔ Choisit "b" si 1 <= n < 2
+// ➔ Choisit "c" si n >= 2
+```
+
+Lorsqu'une forme moins explicite est utilisée, templural utilise les [plural rules](#plural-rules) pour choisir quoi faire.
+
+Il est possible de modifier les plages de nombres utilisées par templural, soit en modifiant les plages par défaut :
+
+```js
+templural.setRanges(...)
+```
+
+soit en créant une nouvelle fonction de template avec des plages spécifiques :
+
+```js
+import { forRanges } from 'templural'
+
+const templuralCustom = forRanges(...)
+```
+
+Les plages par défaut utilisées par templural sont définies dans [`index.ts`](https://github.com/nlepage/templural/blob/ef1e75601049b545637ba8c2b4ce36ee3e8a6f18/src/index.ts#L8).
+
+### Plural rules
+
+templural utilise [`Intl.PluralRules`](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) pour choisir quoi faire quand cela n'est pas spécifié explicitement.
+
+Par exemple, zéro est pluriel en anglais alors qu'il est singulier en français :
+
+```js
+templural.setLocales('en')
+templural`You have ${0} message{s}` // ➔ "You have 0 messages"
+
+templural.setLocales('fr')
+templural`Vous avez ${0} message{s}` // ➔ "Vous avez 0 message"
+```
+
+Il est donc recommandé de sélectionner la bonne langue lorsqu'on utilise templural afin d'éviter les erreurs.
+
+Cependant il est possible de spécifier explicitement quoi faire dans tous les cas, et d'éviter de reposer sur `Intl.PluralRules` :
+
+```js
+// Cette phrase en français sera correcte même si la langue sélectionnée est l'anglais
+templural`Vous avez ${0} message{::s}` // ➔ "Vous avez 0 message"
+```
+
+#### Sélectionner la langue
+
+Il est possible de sélectionner la langue utilisée par templural, soit en changeant la langue par défaut :
+
+```js
+templural.setLocales('fr_BE') // Français (Belgique)
+```
+
+ou en créant une nouvelle fonction de template pour une langue spécifique :
+
+```js
+import { forLocales } from 'templural'
+
+const templuralDeCH = forLocales('de_CH') // Allemand (Suisse)
+```
+
+Pour plus d'informations sur les valeurs acceptées par `templural.setLocales()` et `forLocales()` voir l'[argument locales](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl#argument_locales).
+
 ## ❓ FAQ
 
 ### De nouvelles features sont-elles prévues ?
@@ -145,9 +226,7 @@ templural est simple et bête, et il va probablement le rester.
 
 ### Et les nombres négatifs ou flottants alors ?
 
-templural s'en moque.
-
-Si un nombre est inférieur ou égal à 1, les mots correspondants sont au singulier.
+🚧 FIXME
 
 ### D'autres questions ?
 
