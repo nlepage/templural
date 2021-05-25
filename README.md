@@ -147,7 +147,7 @@ templural is designed to be adaptable to any language.
 
 ### Plural rules
 
-templural uses [Intl.PulralRules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) to choose what to do when you don't specify it explicitly.
+templural uses [`Intl.PulralRules`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) to choose what to do when you don't specify it explicitly.
 
 For example, zero is plural in english whereas it is singular in french:
 
@@ -157,6 +157,15 @@ templural`You have ${0} message{s}` // ➔ "You have 0 messages"
 
 templural.setLocales('fr')
 templural`Vous avez ${0} message{s}` // ➔ "Vous avez 0 message"
+```
+
+So it is preferable to set the correct locale when using templural in order to avoid mistakes.
+
+However you may choose to specify explicitly what to do in all cases, and avoid relying on `Intl.PulralRules`:
+
+```js
+// This french sentence will be correct even if the locale is set to english
+templural`Vous avez ${0} message{::s}` // ➔ "Vous avez 0 message"
 ```
 
 #### Setting locale
