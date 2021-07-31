@@ -1,4 +1,4 @@
-import { CategoriesFallbacks, buildCategories } from './categories'
+import { CategoriesFallbacks, buildCategories, localesFallbacks } from './categories'
 
 type Locales = string | string[]
 
@@ -39,24 +39,30 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
   function resolveSplit(split: string[], args: any[], index: number): string {
     if (index === -1 || typeof args[index] !== 'number') return ''
 
-    const category = pluralRules.select(args[index])
     const splitCategories = categories[split.length - 1]
 
-    let splitIndex = splitCategories.indexOf(category)
+    let category = pluralRules.select(args[index])
 
-    if (splitIndex !== -1) return split[splitIndex]
+    do {
+      let splitIndex = splitCategories.indexOf(category)
+      if (splitIndex !== -1) return split[splitIndex]
 
-    return '' // FIXME fallback
+      category = categoriesFallbacks?.[category]
+    } while (category != null)
+
+    return ''
   }
 
   let pluralRules: Intl.PluralRules
   let categories: Intl.LDMLPluralRule[][]
+  let categoriesFallbacks: CategoriesFallbacks
 
   templural.setLocales = function setLocales(locales?: Locales, options?: LocalesOptions) {
     // FIXME throw if no Intl.PluralRules
 
     pluralRules = new Intl.PluralRules(locales)
     categories = buildCategories(pluralRules, options)
+    categoriesFallbacks = localesFallbacks[pluralRules.resolvedOptions().locale]
 
     return templural
   }

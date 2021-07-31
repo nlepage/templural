@@ -47,6 +47,8 @@ test('Accorder un mot avec un nombre ne le précédant pas', t => {
 })
 
 test('Accorder avec des grands nombres', t => {
+  // Explicitly specify other and many need "s"
   t.is(templural`Yoann et Valentin ont eu ${1000000} {::d'}idée{:s:s}`, "Yoann et Valentin ont eu 1000000 d'idées")
-  t.is(templural`${'Thomas'} a ${1000000000} {::de} point{:s:s}`, 'Thomas a 1000000000 de points')
+  // Rely on many falling back to other for "s"
+  t.is(templural`${'Thomas'} a ${1000000000} {::de} point{s}`, 'Thomas a 1000000000 de points')
 })

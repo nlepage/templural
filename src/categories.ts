@@ -12,10 +12,10 @@ export function buildCategories(
   pluralRules: Intl.PluralRules,
   options?: { categoriesPriority?: Intl.LDMLPluralRule[], categoriesOrder?: Intl.LDMLPluralRule[] },
 ): Intl.LDMLPluralRule[][] {
-  const { pluralCategories } = pluralRules.resolvedOptions()
+  const { pluralCategories, locale } = pluralRules.resolvedOptions()
   const {
-    categoriesPriority = localesCategoriesPriority[pluralRules.resolvedOptions().locale] ?? defaultCategoriesPriority,
-    categoriesOrder = localesCategoriesOrder[pluralRules.resolvedOptions().locale] ?? defaultCategoriesOrder
+    categoriesPriority = localesCategoriesPriority[locale] ?? defaultCategoriesPriority,
+    categoriesOrder = localesCategoriesOrder[locale] ?? defaultCategoriesOrder
   } = options ?? {}
 
   const categories: Intl.LDMLPluralRule[][] = []
