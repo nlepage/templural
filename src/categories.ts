@@ -1,46 +1,10 @@
-export type Categories = (
-  [
-    [Intl.LDMLPluralRule],
-  ] |
-  [
-    [Intl.LDMLPluralRule],
-    [Intl.LDMLPluralRule, Intl.LDMLPluralRule],
-  ] |
-  [
-    [Intl.LDMLPluralRule],
-    [Intl.LDMLPluralRule, Intl.LDMLPluralRule],
-    [Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule],
-  ] |
-  [
-    [Intl.LDMLPluralRule],
-    [Intl.LDMLPluralRule, Intl.LDMLPluralRule],
-    [Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule],
-    [Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule],
-  ] |
-  [
-    [Intl.LDMLPluralRule],
-    [Intl.LDMLPluralRule, Intl.LDMLPluralRule],
-    [Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule],
-    [Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule],
-    [Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule],
-  ] |
-  [
-    [Intl.LDMLPluralRule],
-    [Intl.LDMLPluralRule, Intl.LDMLPluralRule],
-    [Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule],
-    [Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule],
-    [Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule],
-    [Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule, Intl.LDMLPluralRule],
-  ]
-)
-
 const defaultCategoriesPriority: Intl.LDMLPluralRule[] = ['other', 'one', 'two', 'few', 'many', 'zero']
 const defaultCategoriesOrder: Intl.LDMLPluralRule[] = ['zero', 'one', 'two', 'few', 'many', 'other']
 
-export function guessCategories(
+export function buildCategories(
   pluralRules: Intl.PluralRules,
   options?: { categoriesPriority?: Intl.LDMLPluralRule[], categoriesOrder?: Intl.LDMLPluralRule[] },
-): Categories {
+): Intl.LDMLPluralRule[][] {
   const { pluralCategories } = pluralRules.resolvedOptions()
   const { categoriesPriority = defaultCategoriesPriority, categoriesOrder = defaultCategoriesOrder } = options ?? {}
 
@@ -54,7 +18,7 @@ export function guessCategories(
       )
     })
 
-  return categories as Categories
+  return categories
 }
 
 export type CategoriesFallbacks = { [key in Intl.LDMLPluralRule]?: Intl.LDMLPluralRule }

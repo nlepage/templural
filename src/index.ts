@@ -1,4 +1,4 @@
-import { Categories, CategoriesFallbacks, guessCategories } from './categories'
+import { CategoriesFallbacks, buildCategories } from './categories'
 
 type Locales = string | string[]
 
@@ -50,13 +50,13 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
   }
 
   let pluralRules: Intl.PluralRules
-  let categories: Categories
+  let categories: Intl.LDMLPluralRule[][]
 
   templural.setLocales = function setLocales(locales?: Locales, options?: LocalesOptions) {
     // FIXME throw if no Intl.PluralRules
 
     pluralRules = new Intl.PluralRules(locales)
-    categories = guessCategories(pluralRules, options)
+    categories = buildCategories(pluralRules, options)
 
     return templural
   }
