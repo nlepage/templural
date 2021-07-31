@@ -109,6 +109,8 @@ templural`Dans le ciel vole{$1:nt} ${nbWhales} baleine{s}`
 
 ## 🗣️ Internationalisation
 
+**⚠ Cette section est obsolète et doit être mise à jour ! ⚠**
+
 templural est conçu pour être adaptable à n'importe quelle langue.
 
 ### Number ranges

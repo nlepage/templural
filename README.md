@@ -111,6 +111,8 @@ Use `$2`, `$3` or `$n` to reference the second, the third or the nth interpolate
 
 ## 🗣️ Internationalization
 
+**⚠ This section is outdated and needs to be updated! ⚠**
+
 templural is designed to be adaptable to any language.
 
 ### Number ranges
