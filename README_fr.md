@@ -105,35 +105,7 @@ templural`Dans le ciel vole{$1:nt} ${nbWhales} baleine{s}`
 
 `$1` référence la première expression interpolée.
 
-`$2`, `$3` ou `$n` peuvent être utilisé pour référencer la deuxième, troisième ou énième expression interpolée.
-
-### Remplacer un nombre par du texte
-
-```js
-templural`Vous avez {${nbMessages}:un:plusieurs} message{s}`
-
-// nbMessages = 1 ➔ "Vous avez un message"
-// nbMessages = 86 ➔ "Vous avez plusieurs messages"
-```
-
-#### Choisir un texte différent si le nombre est zéro
-
-```js
-templural`Vous {$1:n'::}avez {${nbMessages}:aucun:un:plusieurs} message{s}`
-
-// nbMessages = 0 ➔ "Vous n'avez aucun message"
-// nbMessages = 1 ➔ "Vous avez un message"
-// nbMessages = 86 ➔ "Vous avez plusieurs messages"
-```
-
-#### Mélanger le remplacement ou non d'un nombre par du texte
-
-```js
-templural`Vous avez {${nbMessages}:un:$1} message{s}`
-
-// nbMessages = 1 ➔ "Vous avez un message"
-// nbMessages = 86 ➔ "Vous avez 86 messages"
-```
+`$2`, `$3` ou `$n` peuvent être utilisés pour référencer la deuxième, troisième ou énième expression interpolée.
 
 ## 🗣️ Internationalisation
 

@@ -109,34 +109,6 @@ templural`There {$1:is:are} ${nbWhales} flying whale{s}`
 
 Use `$2`, `$3` or `$n` to reference the second, the third or the nth interpolated expression.
 
-### Replace numbers by text
-
-```js
-templural`You have {${nbMessages}:a:several} message{s}`
-
-// nbMessages = 1 ➔ "You have a message"
-// nbMessages = 86 ➔ "You have several messages"
-```
-
-#### Choose a different text when the number is zero
-
-```js
-templural`You have {${nbMessages}:no:a:several} message{s}`
-
-// nbMessages = 0 ➔ "You have no messages"
-// nbMessages = 1 ➔ "You have a message"
-// nbMessages = 86 ➔ "You have several messages"
-```
-
-#### Mix replacing and not replacing numbers by text
-
-```js
-templural`You have {${nbMessages}:a:$1} message{s}`
-
-// nbMessages = 1 ➔ "You have a message"
-// nbMessages = 86 ➔ "You have 86 messages"
-```
-
 ## 🗣️ Internationalization
 
 templural is designed to be adaptable to any language.
