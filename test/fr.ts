@@ -45,19 +45,3 @@ test('Accorder un mot avec un nombre ne le précédant pas', t => {
   t.is(templural`Dans le ciel vole{$1:nt} ${1} baleine{s}`, 'Dans le ciel vole 1 baleine')
   t.is(templural`Dans le ciel vole{$1:nt} ${2} baleine{s}`, 'Dans le ciel volent 2 baleines')
 })
-
-test('Remplacer un nombre par du texte', t => {
-  t.is(templural`Vous avez {${1}:un:plusieurs} message{s}`, 'Vous avez un message')
-  t.is(templural`Vous avez {${86}:un:plusieurs} message{s}`, 'Vous avez plusieurs messages')
-})
-
-test('Choisir un texte différent si le nombre est zéro', t => {
-  t.is(templural`Vous {$1:n'::}avez {${0}:aucun:un:plusieurs} message{s}`, "Vous n'avez aucun message")
-  t.is(templural`Vous {$1:n'::}avez {${1}:aucun:un:plusieurs} message{s}`, 'Vous avez un message')
-  t.is(templural`Vous {$1:n'::}avez {${86}:aucun:un:plusieurs} message{s}`, 'Vous avez plusieurs messages')
-})
-
-test("Mélanger le remplacement ou non d'un nombre par du texte", t => {
-  t.is(templural`Vous avez {${1}:un:$1} message{s}`, 'Vous avez un message')
-  t.is(templural`Vous avez {${86}:un:$1} message{s}`, 'Vous avez 86 messages')
-})

@@ -57,7 +57,7 @@ export function guessCategories(
   return categories as Categories
 }
 
-type CategoriesFallbacks = { [key in Intl.LDMLPluralRule]?: Intl.LDMLPluralRule }
+export type CategoriesFallbacks = { [key in Intl.LDMLPluralRule]?: Intl.LDMLPluralRule }
 
 export const localesFallbacks: { [key: string]: CategoriesFallbacks } = {
   fr: { many: 'other' },

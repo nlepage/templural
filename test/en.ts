@@ -47,19 +47,3 @@ test('Match a word to a non preceding number', t => {
   t.is(templural`There {$1:is:are} ${1} flying whale{s}`, 'There is 1 flying whale')
   t.is(templural`There {$1:is:are} ${2} flying whale{s}`, 'There are 2 flying whales')
 })
-
-test('Replace numbers by text', t => {
-  t.is(templural`You have {${1}:a:several} message{s}`, 'You have a message')
-  t.is(templural`You have {${2}:a:several} message{s}`, 'You have several messages')
-})
-
-test('Choose a different text when the number is zero', t => {
-  t.is(templural`You have {${0}:no:a:several} message{s}`, 'You have no messages')
-  t.is(templural`You have {${1}:no:a:several} message{s}`, 'You have a message')
-  t.is(templural`You have {${86}:no:a:several} message{s}`, 'You have several messages')
-})
-
-test('Mix replacing and not replacing numbers by text', t => {
-  t.is(templural`You have {${1}:a:$1} message{s}`, 'You have a message')
-  t.is(templural`You have {${86}:a:$1} message{s}`, 'You have 86 messages')
-})

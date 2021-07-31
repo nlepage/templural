@@ -208,7 +208,7 @@ It is possible to change the locale used by templural, either by setting the def
 templural.setLocales('fr_BE') // French (Belgium)
 ```
 
-or by creating a new template function with a specific locale:
+or by creating a new template function for a specific locale:
 
 ```js
 import { forLocales } from 'templural'
