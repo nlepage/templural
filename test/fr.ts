@@ -45,3 +45,8 @@ test('Accorder un mot avec un nombre ne le précédant pas', t => {
   t.is(templural`Dans le ciel vole{$1:nt} ${1} baleine{s}`, 'Dans le ciel vole 1 baleine')
   t.is(templural`Dans le ciel vole{$1:nt} ${2} baleine{s}`, 'Dans le ciel volent 2 baleines')
 })
+
+test('Accorder avec des grands nombres', t => {
+  t.is(templural`Yoann et Valentin ont eu ${1000000} {::d'}idée{:s:s}`, "Yoann et Valentin ont eu 1000000 d'idées")
+  t.is(templural`${'Thomas'} a ${1000000000} {::de} point{:s:s}`, 'Thomas a 1000000000 de points')
+})

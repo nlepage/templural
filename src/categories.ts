@@ -1,12 +1,22 @@
 const defaultCategoriesPriority: Intl.LDMLPluralRule[] = ['other', 'one', 'two', 'few', 'many', 'zero']
+
+const localesCategoriesPriority: { [key: string]: Intl.LDMLPluralRule[] } = {}
+
 const defaultCategoriesOrder: Intl.LDMLPluralRule[] = ['zero', 'one', 'two', 'few', 'many', 'other']
+
+const localesCategoriesOrder: { [key: string]: Intl.LDMLPluralRule[] } = {
+  fr: ['one', 'other', 'many'],
+}
 
 export function buildCategories(
   pluralRules: Intl.PluralRules,
   options?: { categoriesPriority?: Intl.LDMLPluralRule[], categoriesOrder?: Intl.LDMLPluralRule[] },
 ): Intl.LDMLPluralRule[][] {
   const { pluralCategories } = pluralRules.resolvedOptions()
-  const { categoriesPriority = defaultCategoriesPriority, categoriesOrder = defaultCategoriesOrder } = options ?? {}
+  const {
+    categoriesPriority = localesCategoriesPriority[pluralRules.resolvedOptions().locale] ?? defaultCategoriesPriority,
+    categoriesOrder = localesCategoriesOrder[pluralRules.resolvedOptions().locale] ?? defaultCategoriesOrder
+  } = options ?? {}
 
   const categories: Intl.LDMLPluralRule[][] = []
 
