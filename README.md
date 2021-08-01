@@ -78,7 +78,7 @@ templural`I bought ${nbCarrots} carrot{s} and ${nbPotatoes} potato{es}`
 ### Words with a different form in the singular and plural
 
 ```js
-templural`${nbConnected} {person:people} {is:are} connected`
+templural`${nbConnected} {person;people} {is;are} connected`
 
 // nbConnected = 1 ➔ "1 person is connected"
 // nbConnected = 2 ➔ "2 people are connected"
@@ -88,7 +88,7 @@ templural`${nbConnected} {person:people} {is:are} connected`
 ### Mix all the previous examples
 
 ```js
-templural`${nbDogs} dog{s} bark{s:} and ${nbCats} cat{s} meow{s:}`
+templural`${nbDogs} dog{s} bark{s;} and ${nbCats} cat{s} meow{s;}`
 
 // nbDogs = 1, nbCats = 1 ➔ "1 dog barks and 1 cat meows"
 // nbDogs = 2, nbCats = 1 ➔ "2 dogs bark and 1 cat meows"
@@ -99,7 +99,7 @@ templural`${nbDogs} dog{s} bark{s:} and ${nbCats} cat{s} meow{s:}`
 ### Match a word to a *non preceding* number
 
 ```js
-templural`There {$1:is:are} ${nbWhales} flying whale{s}`
+templural`There {$1;is;are} ${nbWhales} flying whale{s}`
 
 // nbWhales = 1 ➔ "There is 1 flying whale"
 // nbWhales = 2 ➔ "There are 2 flying whales"
@@ -123,11 +123,11 @@ templural uses number ranges to define what to do, from less to more explicit:
 templural`${n}{a}`
 // ➔ Chooses "a" if n >= 2
 
-templural`${n}{a:b}`
+templural`${n}{a;b}`
 // ➔ Chooses "a" if 1 <= n < 2
 // ➔ Chooses "b" if n >= 2
 
-templural`${n}{a:b:c}`
+templural`${n}{a;b;c}`
 // ➔ Chooses "a" if 0 <= n < 1
 // ➔ Chooses "b" if 1 <= n < 2
 // ➔ Chooses "c" if n >= 2
@@ -171,7 +171,7 @@ However it is possible to specify explicitly what to do in all cases, and avoid 
 
 ```js
 // This french sentence will be correct even if the locale is set to english
-templural`Vous avez ${0} message{::s}` // ➔ "Vous avez 0 message"
+templural`Vous avez ${0} message{;;s}` // ➔ "Vous avez 0 message"
 ```
 
 #### Setting locale

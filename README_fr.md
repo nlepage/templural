@@ -78,7 +78,7 @@ templural`J'ai acheté ${nbCarottes} carotte{s} et ${nbPatates} patate{s}`
 ### Mots avec une forme différentes au singulier et au pluriel
 
 ```js
-templural`${nbConnectes} personne{s} {est:sont} connecté{s}`
+templural`${nbConnectes} personne{s} {est;sont} connecté{s}`
 
 // nbConnectes = 1 ➔ "1 personne est connectée"
 // nbConnectes = 2 ➔ "2 personnes sont connectées"
@@ -88,7 +88,7 @@ templural`${nbConnectes} personne{s} {est:sont} connecté{s}`
 ### Un mélange de tous les exemples précédents
 
 ```js
-templural`${nbChevaux} cheva{l:ux} {a:ont} ${nbChevaux} tête{s}, ${nbChevaux * 2} {oeil:yeux} et ${nbChevaux * 4} patte{s}`
+templural`${nbChevaux} cheva{l;ux} {a;ont} ${nbChevaux} tête{s}, ${nbChevaux * 2} {oeil;yeux} et ${nbChevaux * 4} patte{s}`
 
 // nbChevaux = 1 ➔ "1 cheval a 1 tête, 2 yeux et 4 pattes"
 // nbChevaux = 2 ➔ "2 chevaux ont 2 têtes, 4 yeux et 8 pattes"
@@ -97,7 +97,7 @@ templural`${nbChevaux} cheva{l:ux} {a:ont} ${nbChevaux} tête{s}, ${nbChevaux * 
 ### Accorder un mot avec un nombre *ne le précédant pas*
 
 ```js
-templural`Dans le ciel vole{$1:nt} ${nbWhales} baleine{s}`
+templural`Dans le ciel vole{$1;nt} ${nbWhales} baleine{s}`
 
 // nbWhales = 1 ➔ "Dans le ciel vole 1 baleine"
 // nbWhales = 2 ➔ "Dans le ciel volent 2 baleines"
@@ -121,11 +121,11 @@ templural utilise des plages de nombres pour définir quoi faire, du moins au pl
 templural`${n}{a}`
 // ➔ Choisit "a" si n >= 2
 
-templural`${n}{a:b}`
+templural`${n}{a;b}`
 // ➔ Choisit "a" si 1 <= n < 2
 // ➔ Choisit "b" si n >= 2
 
-templural`${n}{a:b:c}`
+templural`${n}{a;b;c}`
 // ➔ Choisit "a" si 0 <= n < 1
 // ➔ Choisit "b" si 1 <= n < 2
 // ➔ Choisit "c" si n >= 2
@@ -169,7 +169,7 @@ Cependant il est possible de spécifier explicitement quoi faire dans tous les c
 
 ```js
 // Cette phrase en français sera correcte même si la langue sélectionnée est l'anglais
-templural`Vous avez ${0} message{::s}` // ➔ "Vous avez 0 message"
+templural`Vous avez ${0} message{;;s}` // ➔ "Vous avez 0 message"
 ```
 
 #### Sélectionner la langue
