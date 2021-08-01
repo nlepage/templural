@@ -1,11 +1,18 @@
-import { CategoriesFallbacks, buildCategories, localesFallbacks } from './categories'
+import { CategoriesFallbacks, buildCategories } from './categories'
 
-type Locales = string | string[]
+export type Locales = string | string[]
 
-type LocalesOptions = {
+export type LocalesOptions = {
   categoriesPriority?: Intl.LDMLPluralRule[],
   categoriesOrder?: Intl.LDMLPluralRule[],
   categoriesFallbacks?: CategoriesFallbacks,
+}
+
+const defaultLocalesOptions: { [key: string]: LocalesOptions } = {
+  fr: {
+    categoriesFallbacks: { many: 'other' },
+    categoriesOrder: ['one', 'other', 'many'],
+  }
 }
 
 export function forLocales(locales?: Locales, options?: LocalesOptions) {
@@ -59,17 +66,17 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
 
   templural.setLocales = function setLocales(locales?: Locales, options?: LocalesOptions) {
     // FIXME throw if no Intl.PluralRules
-
     pluralRules = new Intl.PluralRules(locales)
-    categories = buildCategories(pluralRules, options)
-    categoriesFallbacks = localesFallbacks[pluralRules.resolvedOptions().locale]
+
+    const optionsWDefault = Object.assign({}, options, defaultLocalesOptions[pluralRules.resolvedOptions().locale])
+
+    categories = buildCategories(pluralRules, optionsWDefault)
+    categoriesFallbacks = optionsWDefault.categoriesFallbacks
 
     return templural
   }
 
-  templural.setLocales(locales, options)
-
-  return templural
+  return templural.setLocales(locales, options)
 }
 
 export const templural = forLocales()
