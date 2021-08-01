@@ -30,25 +30,25 @@ test('Accorder plusieurs mots chacun avec un nombre différent', t => {
 })
 
 test('Mots avec une forme différentes au singulier et au pluriel', t => {
-  t.is(templural`${1} personne{s} {est:sont} connectée{s}`, '1 personne est connectée')
-  t.is(templural`${2} personne{s} {est:sont} connectée{s}`, '2 personnes sont connectées')
-  t.is(templural`${666} personne{s} {est:sont} connectée{s}`, '666 personnes sont connectées')
+  t.is(templural`${1} personne{s} {est;sont} connectée{s}`, '1 personne est connectée')
+  t.is(templural`${2} personne{s} {est;sont} connectée{s}`, '2 personnes sont connectées')
+  t.is(templural`${666} personne{s} {est;sont} connectée{s}`, '666 personnes sont connectées')
 })
 
 test('Un mélange de tous les exemples précédents', t => {
-  t.is(templural`${1} cheva{l:ux} {a:ont} ${1} tête{s}, ${2} {oeil:yeux} et ${4} patte{s}`, '1 cheval a 1 tête, 2 yeux et 4 pattes')
-  t.is(templural`${2} cheva{l:ux} {a:ont} ${2} tête{s}, ${4} {oeil:yeux} et ${8} patte{s}`, '2 chevaux ont 2 têtes, 4 yeux et 8 pattes')
-  t.is(templural`${1} cheva{l:ux} borgne{s} {a:ont} ${1} tête{s}, ${1} {oeil:yeux} et ${4} patte{s}`, '1 cheval borgne a 1 tête, 1 oeil et 4 pattes')
+  t.is(templural`${1} cheva{l;ux} {a;ont} ${1} tête{s}, ${2} {oeil;yeux} et ${4} patte{s}`, '1 cheval a 1 tête, 2 yeux et 4 pattes')
+  t.is(templural`${2} cheva{l;ux} {a;ont} ${2} tête{s}, ${4} {oeil;yeux} et ${8} patte{s}`, '2 chevaux ont 2 têtes, 4 yeux et 8 pattes')
+  t.is(templural`${1} cheva{l;ux} borgne{s} {a;ont} ${1} tête{s}, ${1} {oeil;yeux} et ${4} patte{s}`, '1 cheval borgne a 1 tête, 1 oeil et 4 pattes')
 })
 
 test('Accorder un mot avec un nombre ne le précédant pas', t => {
-  t.is(templural`Dans le ciel vole{$1:nt} ${1} baleine{s}`, 'Dans le ciel vole 1 baleine')
-  t.is(templural`Dans le ciel vole{$1:nt} ${2} baleine{s}`, 'Dans le ciel volent 2 baleines')
+  t.is(templural`Dans le ciel vole{$1;nt} ${1} baleine{s}`, 'Dans le ciel vole 1 baleine')
+  t.is(templural`Dans le ciel vole{$1;nt} ${2} baleine{s}`, 'Dans le ciel volent 2 baleines')
 })
 
 test('Accorder avec des grands nombres', t => {
   // Explicitly specify other and many need "s"
-  t.is(templural`Yoann et Valentin ont eu ${1000000} {::d'}idée{:s:s}`, "Yoann et Valentin ont eu 1000000 d'idées")
+  t.is(templural`Yoann et Valentin ont eu ${1000000} {;;d'}idée{;s;s}`, "Yoann et Valentin ont eu 1000000 d'idées")
   // Rely on many falling back to other for "s"
-  t.is(templural`${'Thomas'} a ${1000000000} {::de} point{s}`, 'Thomas a 1000000000 de points')
+  t.is(templural`${'Thomas'} a ${1000000000} {;;de} point{s}`, 'Thomas a 1000000000 de points')
 })

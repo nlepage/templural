@@ -31,19 +31,19 @@ test('Match several words each to a different preceding number', t => {
 })
 
 test('Words with a different form in the singular and plural', t => {
-  t.is(templural`${1} {person:people} {is:are} connected`, '1 person is connected')
-  t.is(templural`${2} {person:people} {is:are} connected`, '2 people are connected')
-  t.is(templural`${666} {person:people} {is:are} connected`, '666 people are connected')
+  t.is(templural`${1} {person;people} {is;are} connected`, '1 person is connected')
+  t.is(templural`${2} {person;people} {is;are} connected`, '2 people are connected')
+  t.is(templural`${666} {person;people} {is;are} connected`, '666 people are connected')
 })
 
 test('Match several words with several preceding numbers', t => {
-  t.is(templural`${1} dog{s} bark{s:} and ${1} cat{s} meow{s:}`, '1 dog barks and 1 cat meows')
-  t.is(templural`${2} dog{s} bark{s:} and ${1} cat{s} meow{s:}`, '2 dogs bark and 1 cat meows')
-  t.is(templural`${1} dog{s} bark{s:} and ${2} cat{s} meow{s:}`, '1 dog barks and 2 cats meow')
-  t.is(templural`${2} dog{s} bark{s:} and ${2} cat{s} meow{s:}`, '2 dogs bark and 2 cats meow')
+  t.is(templural`${1} dog{s} bark{s;} and ${1} cat{s} meow{s;}`, '1 dog barks and 1 cat meows')
+  t.is(templural`${2} dog{s} bark{s;} and ${1} cat{s} meow{s;}`, '2 dogs bark and 1 cat meows')
+  t.is(templural`${1} dog{s} bark{s;} and ${2} cat{s} meow{s;}`, '1 dog barks and 2 cats meow')
+  t.is(templural`${2} dog{s} bark{s;} and ${2} cat{s} meow{s;}`, '2 dogs bark and 2 cats meow')
 })
 
 test('Match a word to a non preceding number', t => {
-  t.is(templural`There {$1:is:are} ${1} flying whale{s}`, 'There is 1 flying whale')
-  t.is(templural`There {$1:is:are} ${2} flying whale{s}`, 'There are 2 flying whales')
+  t.is(templural`There {$1;is;are} ${1} flying whale{s}`, 'There is 1 flying whale')
+  t.is(templural`There {$1;is;are} ${2} flying whale{s}`, 'There are 2 flying whales')
 })

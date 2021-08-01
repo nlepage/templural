@@ -26,7 +26,7 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
 
       next = next.replace(/\{(.*?)\}/g, (_match, g1) => {
         let index = i - 1
-        let split = g1.split(':')
+        let split = g1.split(';')
 
         const indexMatch = /^\$(\d)+$/.exec(split[0])
         if (indexMatch != null) {
