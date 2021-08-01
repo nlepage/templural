@@ -1,4 +1,4 @@
-import { CategoriesFallbacks, buildCategories } from './categories'
+import { buildCategories } from './categories'
 
 export type Locales = string | string[]
 
@@ -7,6 +7,8 @@ export type LocalesOptions = {
   categoriesOrder?: Intl.LDMLPluralRule[],
   categoriesFallbacks?: CategoriesFallbacks,
 }
+
+export type CategoriesFallbacks = { [key in Intl.LDMLPluralRule]?: Intl.LDMLPluralRule }
 
 const defaultLocalesOptions: { [key: string]: LocalesOptions } = {
   fr: {

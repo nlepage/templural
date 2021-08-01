@@ -27,5 +27,3 @@ export function buildCategories(
 
   return categories
 }
-
-export type CategoriesFallbacks = { [key in Intl.LDMLPluralRule]?: Intl.LDMLPluralRule }

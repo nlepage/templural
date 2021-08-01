@@ -7,10 +7,6 @@ test('No number', t => {
   t.is(templural`This is a test{s}`, 'This is a test')
 })
 
-test('Ending left curly must not disappear', t => {
-  t.is(templural`Please don't eat the curly {`, "Please don't eat the curly {")
-})
-
 test('Use several locales', t => {
   const en = forLocales('en')
   const fr = forLocales('fr')
