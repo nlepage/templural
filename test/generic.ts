@@ -21,3 +21,10 @@ test('Plural substitution in template args should not be resolved', t => {
   t.is(templural`You have ${2} message{${'s}'}`, 'You have 2 message{s}')
   t.is(templural`You have ${2} message{${'s'}}`, 'You have 2 message{s}')
 })
+
+test('Implicit and associative syntaxes cannot be mixed', t => {
+  t.throws(() => templural`${0}{test;one:test}`, {
+    instanceOf: Error,
+    message: 'Implicit and associative syntaxes cannot be mixed',
+  })
+})
