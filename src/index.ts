@@ -20,17 +20,12 @@ const defaultLocalesOptions: { [key: string]: LocalesOptions } = {
 export function forLocales(locales?: Locales, options?: LocalesOptions) {
   function templural(chunks: TemplateStringsArray, ...args: any[]): string {
     return chunks.reduce((prev, chunk, i) => {
-      let next = chunk.replace(/\{(.*?)\}/g, (_match, g1) => {
-        let index = i - 1
-        let split = g1.split(';') // FIXME support escaping
+      let next = chunk.replace(/\{(.*?)\}/g, (_match, group: string) => {
+        const indexMatch = /^\$(\d)+;(.*)$/.exec(group)
 
-        const indexMatch = /^\$(\d)+$/.exec(split[0])
-        if (indexMatch != null) {
-          index = Number(indexMatch[1]) - 1
-          split = split.slice(1)
-        }
-
-        return resolveSplit(split, args, index)
+        return indexMatch == null
+          ? resolveGroup(group, args, i)
+          : resolveGroup(indexMatch[2], args, Number(indexMatch[1]))
       })
 
       if (i > 0) next = toString(args[i - 1]) + next
@@ -39,12 +34,16 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
     }, '')
   }
 
-  function resolveSplit(split: string[], args: any[], index: number): string {
-    if (index === -1 || typeof args[index] !== 'number') return ''
+  function resolveGroup(group: string, args: any[], index: number): string {
+    const n = args[index - 1]
+
+    if (typeof n !== 'number') return ''
+
+    const split = group.split(';') // FIXME support escaping (split)
 
     const splitCategories = categories[split.length - 1]
 
-    let category = pluralRules.select(args[index])
+    let category = pluralRules.select(n)
 
     do {
       let splitIndex = splitCategories.indexOf(category)
