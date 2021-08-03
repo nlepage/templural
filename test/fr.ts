@@ -50,5 +50,7 @@ test('Accorder avec des grands nombres', t => {
   // Explicitly specify other and many need "s"
   t.is(templural`Yoann et Valentin ont eu ${1000000} {;;d'}idée{;s;s}`, "Yoann et Valentin ont eu 1000000 d'idées")
   // Rely on many falling back to other for "s"
-  t.is(templural`${'Thomas'} a ${1000000000} {;;de} point{s}`, 'Thomas a 1000000000 de points')
+  t.is(templural`${'Thomas'} a ${1000000000}{;; de} point{s}`, 'Thomas a 1000000000 de points')
+  // Use category name to avoid double semicolon
+  t.is(templural`${2000000}{many: de} personne{s} {est;sont} connectée{s}`, '2000000 de personnes sont connectées')
 })
