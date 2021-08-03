@@ -20,13 +20,9 @@ const defaultLocalesOptions: { [key: string]: LocalesOptions } = {
 export function forLocales(locales?: Locales, options?: LocalesOptions) {
   function templural(chunks: TemplateStringsArray, ...args: any[]): string {
     return chunks.reduce((prev, chunk, i) => {
-      let next = chunk
-
-      if (i > 0) next = toString(args[i - 1]) + next
-
-      next = next.replace(/\{(.*?)\}/g, (_match, g1) => {
+      let next = chunk.replace(/\{(.*?)\}/g, (_match, g1) => {
         let index = i - 1
-        let split = g1.split(';')
+        let split = g1.split(';') // FIXME support escaping
 
         const indexMatch = /^\$(\d)+$/.exec(split[0])
         if (indexMatch != null) {
@@ -36,6 +32,8 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
 
         return resolveSplit(split, args, index)
       })
+
+      if (i > 0) next = toString(args[i - 1]) + next
 
       return prev + next
     }, '')
@@ -63,7 +61,6 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
   let categoriesFallbacks: CategoriesFallbacks
 
   templural.setLocales = function setLocales(locales?: Locales, options?: LocalesOptions) {
-    // FIXME throw if no Intl.PluralRules
     pluralRules = new Intl.PluralRules(locales)
 
     const optionsWDefault = Object.assign({}, options, defaultLocalesOptions[pluralRules.resolvedOptions().locale])
