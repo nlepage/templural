@@ -14,3 +14,10 @@ test('Use several locales', t => {
   t.is(en`You have ${0} message{s}`, 'You have 0 messages')
   t.is(fr`Vous avez ${0} message{s}`, 'Vous avez 0 message')
 })
+
+test('Plural substitution in template args should not be resolved', t => {
+  t.is(templural`You have ${2} ${'message{s}'}`, 'You have 2 message{s}')
+  t.is(templural`You have ${2} ${'message{s'}}`, 'You have 2 message{s}')
+  t.is(templural`You have ${2} message{${'s}'}`, 'You have 2 message{s}')
+  t.is(templural`You have ${2} message{${'s'}}`, 'You have 2 message{s}')
+})
