@@ -41,6 +41,8 @@ test('Match several words with several preceding numbers', t => {
   t.is(templural`${2} dog{s} bark{s;} and ${1} cat{s} meow{s;}`, '2 dogs bark and 1 cat meows')
   t.is(templural`${1} dog{s} bark{s;} and ${2} cat{s} meow{s;}`, '1 dog barks and 2 cats meow')
   t.is(templural`${2} dog{s} bark{s;} and ${2} cat{s} meow{s;}`, '2 dogs bark and 2 cats meow')
+  // Use category name to avoid trailing semicolon
+  t.is(templural`${1} dog{s} bark{one:s} and ${2} cat{s} meow{one:s}`, '1 dog barks and 2 cats meow')
 })
 
 test('Match a word to a non preceding number', t => {

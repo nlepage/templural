@@ -46,7 +46,7 @@ test('Accorder un mot avec un nombre ne le précédant pas', t => {
   t.is(templural`Dans le ciel vole{$1;nt} ${2} baleine{s}`, 'Dans le ciel volent 2 baleines')
 })
 
-test.failing('Accorder avec des grands nombres', t => {
+test('Accorder avec des grands nombres', t => {
   // Explicitly specify other and many need "s"
   t.is(templural`Yoann et Valentin ont eu ${1000000} {;;d'}idée{;s;s}`, "Yoann et Valentin ont eu 1000000 d'idées")
   // Rely on many falling back to other for "s"

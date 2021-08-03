@@ -41,14 +41,22 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
 
     const split = group.split(';') // FIXME support escaping (split)
 
-    const splitCategories = categories[split.length - 1]
+    const assocMatches = split.map(s => /^(zero|one|two|few|many|other):(.*)$/.exec(s))
+
+    let categoryToResult: { [key in Intl.LDMLPluralRule]?: string }
+    if (assocMatches.every(match => match == null)) {
+      categoryToResult = Object.fromEntries(categories[split.length - 1].map((c, i) => [c, split[i]]))
+    } else {
+      if (assocMatches.some(match => match == null)) {
+        throw new Error('Implicit and associative syntaxes cannot be mixed')
+      }
+      categoryToResult = Object.fromEntries(assocMatches.map(match => match.slice(1)))
+    }
 
     let category = pluralRules.select(n)
 
     do {
-      let splitIndex = splitCategories.indexOf(category)
-      if (splitIndex !== -1) return split[splitIndex]
-
+      if (category in categoryToResult) return categoryToResult[category]
       category = categoriesFallbacks?.[category]
     } while (category != null)
 
