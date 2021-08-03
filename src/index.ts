@@ -34,15 +34,11 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
           split = split.slice(1)
         }
 
-        return resolve(split, args, index)
+        return resolveSplit(split, args, index)
       })
 
       return prev + next
     }, '')
-  }
-
-  function resolve(split: string[], args: any[], index: number): string {
-    return resolveArgRef(resolveSplit(split, args, index), args)
   }
 
   function resolveSplit(split: string[], args: any[], index: number): string {
@@ -82,12 +78,6 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
 }
 
 export const templural = forLocales()
-
-function resolveArgRef(s: string, args: any[]): string {
-  const argRefMatch = /^\$(\d+)$/.exec(s)
-
-  return argRefMatch ? toString(args[parseInt(argRefMatch[1]) - 1]) : s
-}
 
 function toString(v: any): string {
   return v == null ? '' : v.toString()
