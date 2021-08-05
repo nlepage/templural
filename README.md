@@ -1,6 +1,6 @@
 # templural 🍤
 
-**Template function for plural agreements in sentences.**
+**Template function for plural-sensitive formatting.**
 
 [![CI](https://github.com/nlepage/templural/actions/workflows/ci.yml/badge.svg)](https://github.com/nlepage/templural/actions)
 [![Version](https://img.shields.io/npm/v/templural.svg)](https://www.npmjs.com/package/templural)
@@ -135,68 +135,45 @@ Use `$2`, `$3` or `$n` to reference the second, the third or the nth interpolate
 
 ## 🗣️ Internationalization
 
-**⚠ This section is outdated and needs to be updated! ⚠**
-
-templural is designed to be adaptable to any language.
-
-### Number ranges
-
-templural uses number ranges to define what to do, from less to more explicit:
-
-```js
-templural`${n}{a}`
-// ➔ Chooses "a" if n >= 2
-
-templural`${n}{a;b}`
-// ➔ Chooses "a" if 1 <= n < 2
-// ➔ Chooses "b" if n >= 2
-
-templural`${n}{a;b;c}`
-// ➔ Chooses "a" if 0 <= n < 1
-// ➔ Chooses "b" if 1 <= n < 2
-// ➔ Chooses "c" if n >= 2
-```
-
-When using a less explicit form, templural uses [plural rules](#plural-rules) to choose what to do.
-
-It is possible to change the number ranges used by tempural, either by setting the default ranges:
-
-```js
-templural.setRanges(...)
-```
-
-or by creating a new template function with specific ranges:
-
-```js
-import { forRanges } from 'templural'
-
-const templuralCustom = forRanges(...)
-```
-
-The default ranges used by templural are defined in [`index.ts`](https://github.com/nlepage/templural/blob/ef1e75601049b545637ba8c2b4ce36ee3e8a6f18/src/index.ts#L8).
+templural is built on top of [Intl.PluralRules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) and may be used to format sentences in any language.
 
 ### Plural rules
 
-templural uses [`Intl.PluralRules`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) to choose what to do when not specified explicitly.
+Each language has different plural rules.
 
-For example, zero is plural in english whereas it is singular in french:
+For example English has two plural categories, `"one"` for singular, and `"other"` for plural:
 
 ```js
 templural.setLocales('en')
-templural`You have ${0} message{s}` // ➔ "You have 0 messages"
 
-templural.setLocales('fr')
-templural`Vous avez ${0} message{s}` // ➔ "Vous avez 0 message"
+templural`${n} is in the {one;other} category`
+
+// n = 1 ➔ "1 is in the one category"
+// n = 2 ➔ "2 is in the other category"
+// n = 1000000 ➔ "1000000 is in the other category"
+// n = 0 ➔ "0 is in the other category"
 ```
 
-So it is preferable to set the correct locale when using templural in order to avoid mistakes.
-
-However it is possible to specify explicitly what to do in all cases, and avoid relying on `Intl.PluralRules`:
+French is a little different from English, it has a third category `"many"` for some large numbers, and 0 is singular:
 
 ```js
-// This french sentence will be correct even if the locale is set to english
-templural`Vous avez ${0} message{;;s}` // ➔ "Vous avez 0 message"
+templural.setLocales('fr')
+
+templural`${n} is in the {one;other;many} category`
+
+// n = 1 ➔ "1 is in the one category"
+// n = 2 ➔ "2 is in the other category"
+// n = 1000000 ➔ "1000000 is in the many category"
+// n = 0 ➔ "0 is in the one category"
 ```
+
+See [Language Plural Rules](https://unicode-org.github.io/cldr-staging/charts/latest/supplemental/language_plural_rules.html) for information about plural rules in any language.
+
+**FIXME category order**
+
+**FIXME category priority**
+
+**FIXME category fallbacks**
 
 ## ❓ FAQ
 
