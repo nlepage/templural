@@ -34,6 +34,30 @@ or
 const { templural } = require('templural')
 ```
 
+### Choose a locale
+
+templural uses [Intl.PluralRules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) to know which plural rule to apply for a given number, and plural rules vary depending on the language.
+
+This means **you have to set the locale used by templural** in order to format correct sentences.
+
+Either set the default locale:
+
+```js
+templural.setLocales('fr_BE') // French (Belgium)
+```
+
+or create a new template function for a specific locale:
+
+```js
+import { forLocales } from 'templural'
+
+const templuralDeCH = forLocales('de_CH') // German (Switzerland)
+```
+
+For more information about the values accepted by `templural.setLocales()` and `forLocales()` see [locales argument](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument).
+
+The following examples are specific to the English language, see [Internationalization](#%EF%B8%8F-internationalization) for information about other languages.
+
 ### Match a word to a preceding number
 
 ```js
@@ -173,24 +197,6 @@ However it is possible to specify explicitly what to do in all cases, and avoid 
 // This french sentence will be correct even if the locale is set to english
 templural`Vous avez ${0} message{;;s}` // ➔ "Vous avez 0 message"
 ```
-
-#### Setting locale
-
-It is possible to change the locale used by templural, either by setting the default locale:
-
-```js
-templural.setLocales('fr_BE') // French (Belgium)
-```
-
-or by creating a new template function for a specific locale:
-
-```js
-import { forLocales } from 'templural'
-
-const templuralDeCH = forLocales('de_CH') // German (Switzerland)
-```
-
-For more information about the values accepted by `templural.setLocales()` and `forLocales()` see [locales argument](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument).
 
 ## ❓ FAQ
 
