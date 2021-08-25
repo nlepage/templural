@@ -4,11 +4,11 @@
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
-    "lib": ["ES2020"],
+    "lib": ["ES2019"],
     "moduleResolution": "node",
     "rootDir": "src",
     "sourceMap": true,
-    "target": "ES2020"
+    "target": "ES2019"
   },
   "include": [
     "src/**/*.ts"
