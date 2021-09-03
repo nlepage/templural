@@ -4,7 +4,7 @@ import { templural } from '../src'
 
 test.before(() => { templural.setLocales('fr') })
 
-test('Accorder un mot avec nombre le précédant', t => {
+test('Accorder un mot avec un nombre le précédant', t => {
   t.is(templural`Yoann et Valentin ont eu ${1} idée{s}`, 'Yoann et Valentin ont eu 1 idée')
   t.is(templural`Yoann et Valentin ont eu ${2} idée{s}`, 'Yoann et Valentin ont eu 2 idées')
   t.is(templural`Yoann et Valentin ont eu ${42} idée{s}`, 'Yoann et Valentin ont eu 42 idées')
@@ -29,7 +29,7 @@ test('Accorder plusieurs mots chacun avec un nombre différent', t => {
   t.is(templural`J'ai acheté ${2} carotte{s} et ${3} patate{s}`, "J'ai acheté 2 carottes et 3 patates")
 })
 
-test('Mots avec une forme différentes au singulier et au pluriel', t => {
+test('Acccorder un mot avec une forme différente au singulier et au pluriel', t => {
   t.is(templural`${1} personne{s} {est;sont} connectée{s}`, '1 personne est connectée')
   t.is(templural`${2} personne{s} {est;sont} connectée{s}`, '2 personnes sont connectées')
   t.is(templural`${666} personne{s} {est;sont} connectée{s}`, '666 personnes sont connectées')
@@ -52,5 +52,6 @@ test('Accorder avec des grands nombres', t => {
   // Rely on many falling back to other for "s"
   t.is(templural`${'Thomas'} a ${1000000000}{;; de} point{s}`, 'Thomas a 1000000000 de points')
   // Use category name to avoid double semicolon
+  t.is(templural`${2}{many: de} personne{s} {est;sont} connectée{s}`, '2 personnes sont connectées')
   t.is(templural`${2000000}{many: de} personne{s} {est;sont} connectée{s}`, '2000000 de personnes sont connectées')
 })
