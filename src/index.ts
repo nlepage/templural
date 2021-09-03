@@ -19,27 +19,53 @@ const defaultLocalesOptions: { [key: string]: LocalesOptions } = {
 
 export function forLocales(locales?: Locales, options?: LocalesOptions) {
   function templural(chunks: TemplateStringsArray, ...args: any[]): string {
-    return chunks.reduce((prev, chunk, i) => {
-      let next = chunk.replace(/\{(.*?)\}/g, (_match, group: string) => {
-        const indexMatch = /^\$(\d)+;(.*)$/.exec(group)
+    let resolver: Resolver
 
-        return indexMatch == null
-          ? resolveGroup(group, args, i)
-          : resolveGroup(indexMatch[2], args, Number(indexMatch[1]))
-      })
+    const key = chunksToKey(chunks)
+    if (resolversCache.has(key)) {
+      resolver = resolversCache.get(key)
+    } else {
+      resolversCache.set(key, resolver = parseChunks(chunks))
+    }
 
+    return resolver(args)
+  }
+
+  function parseChunks(chunks: TemplateStringsArray): Resolver {
+    const chunkResolvers = chunks.map(parseChunk)
+
+    return (args: any[]) => chunkResolvers.reduce((prev, chunkResolver, i) => {
+      let next = chunkResolver(args)
       if (i > 0) next = toString(args[i - 1]) + next
-
       return prev + next
     }, '')
   }
 
-  function resolveGroup(group: string, args: any[], index: number): string {
-    const n = args[index - 1]
+  function parseChunk(chunk: string, chunkIndex: number): Resolver {
+    let subChunks: string[] = []
+    let groupResolvers: Resolver[] = [undefined]
 
-    if (typeof n !== 'number') return ''
+    let lastIndex = 0
 
-    const split = group.split(';') // FIXME support escaping (split)
+    const re = /\{(.*?)\}/g
+    let res: RegExpExecArray
+    while (res = re.exec(chunk)) {
+      subChunks.push(chunk.slice(lastIndex, res.index))
+      lastIndex = res.index + res[0].length
+
+      groupResolvers.push(parseGroup(res[1], chunkIndex))
+    }
+
+    subChunks.push(chunk.slice(lastIndex))
+
+    return (args: any[]) => subChunks.reduce((prev, subChunk, i) => prev + groupResolvers[i](args) + subChunk)
+  }
+
+  function parseGroup(group: string, chunkIndex: number): Resolver {
+    const indexMatch = /^\$(\d)+;(.*)$/.exec(group)
+    const index = indexMatch == null ? chunkIndex : Number(indexMatch[1])
+
+    const split = (indexMatch == null ? group : indexMatch[2]).split(';') // FIXME support escaping (split)
 
     const assocMatches = split.map(s => /^(zero|one|two|few|many|other):(.*)$/.exec(s))
 
@@ -53,19 +79,26 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
       categoryToResult = Object.fromEntries(assocMatches.map(match => match.slice(1)))
     }
 
-    let category = pluralRules.select(n)
+    return (args: any[]) => {
+      const n = args[index - 1]
 
-    do {
-      if (category in categoryToResult) return categoryToResult[category]
-      category = categoriesFallbacks?.[category]
-    } while (category != null)
-
-    return ''
+      if (typeof n !== 'number') return ''
+  
+      let category = pluralRules.select(n)
+  
+      do {
+        if (category in categoryToResult) return categoryToResult[category]
+        category = categoriesFallbacks?.[category]
+      } while (category != null)
+  
+      return ''
+    }
   }
 
   let pluralRules: Intl.PluralRules
   let categories: Intl.LDMLPluralRule[][]
   let categoriesFallbacks: CategoriesFallbacks
+  const resolversCache = new Map<string, Resolver>()
 
   templural.setLocales = function setLocales(locales?: Locales, options?: LocalesOptions) {
     pluralRules = new Intl.PluralRules(locales)
@@ -74,6 +107,7 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
 
     categories = buildCategories(pluralRules, optionsWDefault)
     categoriesFallbacks = optionsWDefault.categoriesFallbacks
+    resolversCache.clear()
 
     return templural
   }
@@ -84,5 +118,11 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
 export const templural = forLocales()
 
 function toString(v: any): string {
-  return v == null ? '' : v.toString()
+  return v == null ? '' : v.toString() // FIXME not sure
 }
+
+function chunksToKey(chunks: TemplateStringsArray) {
+  return chunks.raw.reduce((acc, chunk, i) => `${acc}\${${i}}${chunk}`)
+}
+
+type Resolver = (args: any[]) => string
