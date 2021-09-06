@@ -42,4 +42,6 @@ test('Escaping special chars', t => {
   t.is(templural`This is a test\\\\\\\\{s}`, 'This is a test\\\\')
   t.is(templural`This is a test\\\\\\\\\\{s}`, 'This is a test\\\\{s}')
   t.is(templural`This is a test\\\\\\\\\\\\{s}`, 'This is a test\\\\\\')
+
+  t.is(templural`This is a test\\{s`, 'This is a test{s')
 })
