@@ -47,16 +47,18 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
 
     let lastIndex = 0
 
-    const re = /(?<!\\)\{(.*?)\}/g
+    const re = /(\\*)\{(.*?)\}/g
     let res: RegExpExecArray
     while (res = re.exec(chunk)) {
-      subChunks.push(chunk.slice(lastIndex, res.index).replace(/\\\{/g, '{'))
+      if (res[1].length % 2 === 1) continue
+
+      subChunks.push(unescape(chunk.slice(lastIndex, res.index + res[1].length)))
       lastIndex = res.index + res[0].length
 
-      groupResolvers.push(parseGroup(res[1], chunkIndex))
+      groupResolvers.push(parseGroup(res[2], chunkIndex))
     }
 
-    subChunks.push(chunk.slice(lastIndex).replace(/\\\{/g, '{'))
+    subChunks.push(unescape(chunk.slice(lastIndex)))
 
     return (args: any[]) => subChunks.reduce((prev, subChunk, i) => prev + groupResolvers[i](args) + subChunk)
   }
@@ -123,6 +125,10 @@ function toString(v: any): string {
 
 function chunksToKey(chunks: TemplateStringsArray) {
   return chunks.raw.reduce((acc, chunk, i) => `${acc}\${${i}}${chunk}`)
+}
+
+function unescape(s: string) {
+  return s.replace(/\\\\|\\\{/g, ss => ss.slice(1))
 }
 
 type Resolver = (args: any[]) => string
