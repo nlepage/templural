@@ -47,16 +47,16 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
 
     let lastIndex = 0
 
-    const re = /\{(.*?)\}/g
+    const re = /(?<!\\)\{(.*?)\}/g
     let res: RegExpExecArray
     while (res = re.exec(chunk)) {
-      subChunks.push(chunk.slice(lastIndex, res.index))
+      subChunks.push(chunk.slice(lastIndex, res.index).replace(/\\\{/g, '{'))
       lastIndex = res.index + res[0].length
 
       groupResolvers.push(parseGroup(res[1], chunkIndex))
     }
 
-    subChunks.push(chunk.slice(lastIndex))
+    subChunks.push(chunk.slice(lastIndex).replace(/\\\{/g, '{'))
 
     return (args: any[]) => subChunks.reduce((prev, subChunk, i) => prev + groupResolvers[i](args) + subChunk)
   }
