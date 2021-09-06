@@ -32,6 +32,7 @@ test('Implicit and associative syntaxes cannot be mixed', t => {
 test('Incomplete groups', t => {
   t.is(templural`This is a test{s`, 'This is a test{s')
   t.is(templural`This is a tests}`, 'This is a tests}')
+  t.is(templural`This is a test{s}a}`, 'This is a testa}')
 })
 
 test('Escaping special chars', t => {
