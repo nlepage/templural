@@ -35,6 +35,7 @@ test('Incomplete groups', t => {
   t.is(templural`This is a test{s}a}`, 'This is a testa}')
 })
 
-test('Escaping special chars', t => {
+test.failing('Escaping special chars', t => {
   t.is(templural`This is a test\\{s}`, 'This is a test{s}')
+  t.is(templural`This is a test\\\\{s}`, 'This is a test\\')
 })
