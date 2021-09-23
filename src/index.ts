@@ -1,4 +1,4 @@
-import { resolveCategoryOrders } from './categories'
+import { CategoryOrders, resolveCategoryOrders } from './categories'
 import { CategoryFallback, defaultLocalesOptions, LocalesOptions } from './locales'
 
 export const templural = forLocales()
@@ -55,7 +55,7 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
 
     const assocMatches = split.map(s => /^(zero|one|two|few|many|other):(.*)$/.exec(s))
 
-    let categoryToResult: { [key in Intl.LDMLPluralRule]?: string }
+    let categoryToResult: Group
     if (assocMatches.every(match => match == null)) {
       categoryToResult = Object.fromEntries(categoryOrders[split.length - 1].map((c, i) => [c, split[i]]))
     } else {
@@ -71,7 +71,7 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
       while (fallback in categoryFallback) {
         fallback = categoryFallback[fallback]
         if (fallback in categoryToResult) {
-          categoryToResult[category] = categoryToResult[fallback]
+          categoryToResult = { ...categoryToResult, [category]: categoryToResult[fallback] }
           break
         }
       }
@@ -88,8 +88,8 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
   }
 
   let pluralRules: Intl.PluralRules
-  let categories: Intl.LDMLPluralRule[]
-  let categoryOrders: Intl.LDMLPluralRule[][]
+  let categories: readonly Intl.LDMLPluralRule[]
+  let categoryOrders: CategoryOrders
   let categoryFallback: CategoryFallback
   const resolversCache = new Map<string, Resolver>()
 
@@ -124,10 +124,10 @@ function chunksToKey(chunks: TemplateStringsArray) {
 }
 
 type Template = {
-  chunks: readonly string[]
-  groups: readonly Group[]
+  readonly chunks: readonly string[]
+  readonly groups: readonly Group[]
 }
 
-type Group = { [key in Intl.LDMLPluralRule]?: string }
+type Group = { readonly [key in Intl.LDMLPluralRule]?: string }
 
 type Resolver = (args: any[]) => string

@@ -6,9 +6,9 @@ export const defaultLocalesOptions: { [key: string]: LocalesOptions } = {
 }
 
 export type LocalesOptions = {
-  categoryPriority?: Intl.LDMLPluralRule[],
-  categoryOrder?: Intl.LDMLPluralRule[],
-  categoryFallback?: CategoryFallback,
+  readonly categoryPriority?: readonly Intl.LDMLPluralRule[],
+  readonly categoryOrder?: readonly Intl.LDMLPluralRule[],
+  readonly categoryFallback?: CategoryFallback,
 }
 
-export type CategoryFallback = { [key in Intl.LDMLPluralRule]?: Intl.LDMLPluralRule }
+export type CategoryFallback = { readonly [key in Intl.LDMLPluralRule]?: Intl.LDMLPluralRule }

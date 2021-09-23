@@ -1,13 +1,13 @@
 import { LocalesOptions } from "./locales"
 
-const defaultCategoryPriority: Intl.LDMLPluralRule[] = ['other', 'one', 'two', 'few', 'many', 'zero']
+const defaultCategoryPriority: readonly Intl.LDMLPluralRule[] = ['other', 'one', 'two', 'few', 'many', 'zero']
 
-const defaultCategoryOrder: Intl.LDMLPluralRule[] = ['zero', 'one', 'two', 'few', 'many', 'other']
+const defaultCategoryOrder: readonly Intl.LDMLPluralRule[] = ['zero', 'one', 'two', 'few', 'many', 'other']
 
 export function resolveCategoryOrders(
-  pluralCategories: Intl.LDMLPluralRule[],
+  pluralCategories: readonly Intl.LDMLPluralRule[],
   options?: LocalesOptions,
-): Intl.LDMLPluralRule[][] {
+): CategoryOrders {
   const {
     categoryPriority = defaultCategoryPriority,
     categoryOrder = defaultCategoryOrder
@@ -25,3 +25,5 @@ export function resolveCategoryOrders(
 
   return categories
 }
+
+export type CategoryOrders = readonly (readonly Intl.LDMLPluralRule[])[]
