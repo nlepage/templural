@@ -80,9 +80,8 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
     return template.map(item => {
       if (isChunk(item)) return item
       if (isArg(item)) return toString(args[item])
-      const arg = args[item.argIndex]
-      if (typeof arg !== 'number') return '' // FIXME try converting to number ?
-      return item.categoryToResult[pluralRules.select(arg)] ?? ''
+      if (!(item.argIndex in args)) return ''
+      return item.categoryToResult[pluralRules.select(args[item.argIndex])] ?? ''
     }).join('')
   }
 
