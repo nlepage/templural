@@ -179,7 +179,7 @@ templural's behavior may be customized using three mechanisms:
 
 #### Category priority
 
-Category priority defines which categories are valued when not specifying a value for each category.
+Category priority defines which categories are valued when not specifying values for all categories.
 
 If priority is:
 
