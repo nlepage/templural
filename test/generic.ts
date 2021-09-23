@@ -47,3 +47,5 @@ test.failing('Escaping special chars', t => {
 
   t.is(templural`This is a test{s\\}}`, 'This is a test')
 })
+
+test.todo('fallback chain')
