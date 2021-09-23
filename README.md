@@ -177,7 +177,7 @@ templural's behavior may be customized using three mechanisms:
  - [Category order](#category-order)
  - [Category fallback](#category-fallback)
 
-#### Category priority
+### Category priority
 
 Category priority defines which categories are valued when not specifying values for all categories.
 
@@ -216,7 +216,7 @@ This default priority is filtered to include only categories of the locale, for 
 
 Some languages may have a different default priority, see [locales.ts](https://github.com/nlepage/templural/blob/main/src/locales.ts).
 
-#### Category order
+### Category order
 
 Category order defines the order in which categories are valued (regardless of their priority).
 
@@ -252,7 +252,7 @@ This default order is filtered to include only categories of the locale, for exa
 
 Some languages may have a different default order, see [locales.ts](https://github.com/nlepage/templural/blob/main/src/locales.ts).
 
-#### Category fallback
+### Category fallback
 
 **FIXME**
 

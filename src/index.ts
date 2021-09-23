@@ -4,58 +4,51 @@ import { CategoryFallback, defaultLocalesOptions, LocalesOptions } from './local
 export const templural = forLocales()
 
 export function forLocales(locales?: Locales, options?: LocalesOptions) {
-  function templural(chunks: TemplateStringsArray, ...args: any[]): string {
-    let resolver: Resolver
+  function templural(chunks: TemplateStringsArray, ...args: readonly any[]): string {
+    let template: Template
 
     const key = chunksToKey(chunks)
-    if (resolversCache.has(key)) {
-      resolver = resolversCache.get(key)
+    if (templateCache.has(key)) {
+      template = templateCache.get(key)
     } else {
-      resolversCache.set(key, resolver = parseChunks(chunks))
+      templateCache.set(key, template = parseChunks(chunks))
     }
 
-    return resolver(args)
+    return resolve(template, args)
   }
 
-  function parseChunks(chunks: TemplateStringsArray): Resolver {
-    const chunkResolvers = chunks.map(parseChunk)
-
-    return (args: any[]) => chunkResolvers.reduce((prev, chunkResolver, i) => {
-      let next = chunkResolver(args)
-      if (i > 0) next = toString(args[i - 1]) + next
-      return prev + next
-    }, '')
+  function parseChunks(chunks: TemplateStringsArray): Template {
+    return chunks.map(parseChunk).reduce((tmpl, chunkTmpl, index) => [...tmpl, index - 1, ...chunkTmpl])
   }
 
-  function parseChunk(chunk: string, chunkIndex: number): Resolver {
-    let subChunks: string[] = []
-    let groupResolvers: Resolver[] = [undefined]
+  function parseChunk(chunk: string, chunkIndex: number): Template {
+    const chunkTmpl: (Chunk | Group)[] = []
 
     let lastIndex = 0
 
     const re = /\{(.*?)\}/g
     let res: RegExpExecArray
     while (res = re.exec(chunk)) {
-      subChunks.push(chunk.slice(lastIndex, res.index))
+      chunkTmpl.push(chunk.slice(lastIndex, res.index))
       lastIndex = res.index + res[0].length
 
-      groupResolvers.push(parseGroup(res[1], chunkIndex))
+      chunkTmpl.push(parseGroup(res[1], chunkIndex))
     }
 
-    subChunks.push(chunk.slice(lastIndex))
+    chunkTmpl.push(chunk.slice(lastIndex))
 
-    return (args: any[]) => subChunks.reduce((prev, subChunk, i) => prev + groupResolvers[i](args) + subChunk)
+    return chunkTmpl
   }
 
-  function parseGroup(group: string, chunkIndex: number): Resolver {
+  function parseGroup(group: string, chunkIndex: number): Group {
     const indexMatch = /^\$(\d)+;(.*)$/.exec(group)
-    const index = indexMatch == null ? chunkIndex : Number(indexMatch[1])
+    const argIndex = (indexMatch == null ? chunkIndex : Number(indexMatch[1])) - 1
 
     const split = (indexMatch == null ? group : indexMatch[2]).split(';') // FIXME support escaping (split)
 
     const assocMatches = split.map(s => /^(zero|one|two|few|many|other):(.*)$/.exec(s))
 
-    let categoryToResult: Group
+    let categoryToResult: CategoryToResult
     if (assocMatches.every(match => match == null)) {
       categoryToResult = Object.fromEntries(categoryOrders[split.length - 1].map((c, i) => [c, split[i]]))
     } else {
@@ -77,21 +70,27 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
       }
     }
 
-    return (args: any[]) => {
-      const n = args[index - 1]
-
-      // FIXME try converting to number ?
-      if (typeof n !== 'number') return ''
-
-      return categoryToResult[pluralRules.select(n)] ?? ''
+    return {
+      argIndex,
+      categoryToResult,
     }
+  }
+
+  function resolve(template: Template, args: readonly any[]) {
+    return template.map(item => {
+      if (isChunk(item)) return item
+      if (isArg(item)) return toString(args[item])
+      const arg = args[item.argIndex]
+      if (typeof arg !== 'number') return '' // FIXME try converting to number ?
+      return item.categoryToResult[pluralRules.select(arg)] ?? ''
+    }).join('')
   }
 
   let pluralRules: Intl.PluralRules
   let categories: readonly Intl.LDMLPluralRule[]
   let categoryOrders: CategoryOrders
   let categoryFallback: CategoryFallback
-  const resolversCache = new Map<string, Resolver>()
+  const templateCache = new Map<string, Template>()
 
   templural.setLocales = function setLocales(locales?: Locales, options?: LocalesOptions) {
     pluralRules = new Intl.PluralRules(locales)
@@ -103,7 +102,7 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
     categoryOrders = resolveCategoryOrders(categories, optionsWDefault)
     categoryFallback = optionsWDefault.categoryFallback ?? {}
 
-    resolversCache.clear()
+    templateCache.clear()
 
     return templural
   }
@@ -123,11 +122,23 @@ function chunksToKey(chunks: TemplateStringsArray) {
   return chunks.raw.reduce((acc, chunk, i) => `${acc}\${${i}}${chunk}`)
 }
 
-type Template = {
-  readonly chunks: readonly string[]
-  readonly groups: readonly Group[]
+type Template = readonly (string | Group | Arg)[]
+
+type Chunk = string
+
+function isChunk(value: Chunk | Group | Arg): value is Chunk {
+  return typeof value === 'string'
 }
 
-type Group = { readonly [key in Intl.LDMLPluralRule]?: string }
+type Group = {
+  readonly argIndex: number
+  readonly categoryToResult: CategoryToResult
+}
 
-type Resolver = (args: any[]) => string
+type CategoryToResult = { readonly [key in Intl.LDMLPluralRule]?: string }
+
+type Arg = number
+
+function isArg(value: Chunk | Group | Arg): value is Arg {
+  return typeof value === 'number'
+}
