@@ -66,8 +66,15 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
     }
 
     for (const category of categories) {
-      if (category in categoryToResult || !(category in categoryFallback)) continue
-      categoryToResult[category] = categoryToResult[categoryFallback[category]]
+      if (category in categoryToResult) continue
+      let fallback = category
+      while (fallback in categoryFallback) {
+        fallback = categoryFallback[fallback]
+        if (fallback in categoryToResult) {
+          categoryToResult[category] = categoryToResult[fallback]
+          break
+        }
+      }
     }
 
     return (args: any[]) => {
