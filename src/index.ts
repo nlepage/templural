@@ -1,21 +1,7 @@
 import { buildCategories } from './categories'
+import { CategoriesFallbacks, defaultLocalesOptions, LocalesOptions } from './locales'
 
-export type Locales = string | string[]
-
-export type LocalesOptions = {
-  categoriesPriority?: Intl.LDMLPluralRule[],
-  categoriesOrder?: Intl.LDMLPluralRule[],
-  categoriesFallbacks?: CategoriesFallbacks,
-}
-
-export type CategoriesFallbacks = { [key in Intl.LDMLPluralRule]?: Intl.LDMLPluralRule }
-
-const defaultLocalesOptions: { [key: string]: LocalesOptions } = {
-  fr: {
-    categoriesFallbacks: { many: 'other' },
-    categoriesOrder: ['one', 'other', 'many'],
-  }
-}
+export const templural = forLocales()
 
 export function forLocales(locales?: Locales, options?: LocalesOptions) {
   function templural(chunks: TemplateStringsArray, ...args: any[]): string {
@@ -117,7 +103,7 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
   return templural.setLocales(locales, options)
 }
 
-export const templural = forLocales()
+export type Locales = string | string[]
 
 function toString(v: any): string {
   return v == null ? '' : v.toString() // FIXME not sure

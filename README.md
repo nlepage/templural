@@ -46,7 +46,7 @@ Either set the default locale:
 templural.setLocales('fr_BE') // French (Belgium)
 ```
 
-or create a new template function for a specific locale:
+or get a new template function for a specific locale:
 
 ```js
 import { forLocales } from 'templural'
@@ -63,10 +63,10 @@ The following examples are specific to the English language, see [Internationali
 ```js
 templural`Yoann and Valentin had ${numberOfIdeas} interesting idea{s}`
 
-// numberOfIdeas = 1 ➔ "Yoann and Valentin had 1 interesting idea"
-// numberOfIdeas = 2 ➔ "Yoann and Valentin had 2 interesting ideas"
+// numberOfIdeas = 1  ➔ "Yoann and Valentin had 1 interesting idea"
+// numberOfIdeas = 2  ➔ "Yoann and Valentin had 2 interesting ideas"
 // numberOfIdeas = 42 ➔ "Yoann and Valentin had 42 interesting ideas"
-// numberOfIdeas = 0 ➔ "Yoann and Valentin had 0 interesting ideas"
+// numberOfIdeas = 0  ➔ "Yoann and Valentin had 0 interesting ideas"
 ```
 
 ### Insert any other values in the text
@@ -74,7 +74,7 @@ templural`Yoann and Valentin had ${numberOfIdeas} interesting idea{s}`
 ```js
 templural`${userName} has ${nbPoints} point{s}`
 
-// userName = "Joe", nbPoints = 1 ➔ "Joe has 1 point"
+// userName = "Joe",   nbPoints = 1    ➔ "Joe has 1 point"
 // userName = "Mario", nbPoints = 1000 ➔ "Mario has 1000 points"
 ```
 
@@ -104,8 +104,8 @@ templural`I bought ${nbCarrots} carrot{s} and ${nbPotatoes} potato{es}`
 ```js
 templural`${nbConnected} {person;people} {is;are} connected`
 
-// nbConnected = 1 ➔ "1 person is connected"
-// nbConnected = 2 ➔ "2 people are connected"
+// nbConnected = 1   ➔ "1 person is connected"
+// nbConnected = 2   ➔ "2 people are connected"
 // nbConnected = 666 ➔ "666 people are connected"
 ```
 
@@ -148,10 +148,10 @@ templural.setLocales('en')
 
 templural`${n} is in the {one;other} category`
 
-// n = 1 ➔ "1 is in the one category"
-// n = 2 ➔ "2 is in the other category"
+// n = 1       ➔ "1 is in the one category"
+// n = 2       ➔ "2 is in the other category"
 // n = 1000000 ➔ "1000000 is in the other category"
-// n = 0 ➔ "0 is in the other category"
+// n = 0       ➔ "0 is in the other category"
 ```
 
 French is a little different from English, it has a third category `"many"` for some large numbers, and 0 is singular:
@@ -161,19 +161,100 @@ templural.setLocales('fr')
 
 templural`${n} is in the {one;other;many} category`
 
-// n = 1 ➔ "1 is in the one category"
-// n = 2 ➔ "2 is in the other category"
+// n = 1       ➔ "1 is in the one category"
+// n = 2       ➔ "2 is in the other category"
 // n = 1000000 ➔ "1000000 is in the many category"
-// n = 0 ➔ "0 is in the one category"
+// n = 0       ➔ "0 is in the one category"
 ```
 
 See [Language Plural Rules](https://unicode-org.github.io/cldr-staging/charts/latest/supplemental/language_plural_rules.html) for information about plural rules in any language.
 
-**FIXME category order**
+**FIXME API**
 
-**FIXME category priority**
+templural's behavior may be customized using three mechanisms:
 
-**FIXME category fallbacks**
+ - [Category priority](#category-priority)
+ - [Category order](#category-order)
+ - [Category fallback](#category-fallback)
+
+#### Category priority
+
+Category priority defines which categories are valued when not specifying a value for each category.
+
+If priority is:
+
+1. many
+2. other
+3. one
+
+Then
+
+```js
+// giving only one value is for category many
+templural`${n} is {many}`
+
+// giving two values is for categories many and other
+templural`${n} is {other;many}`
+
+// giving three values is for categories many, other and one
+templural`${n} is {one;other;many}`
+```
+
+The default priority (regardless of locale) is:
+
+1. other
+2. one
+3. two
+4. few
+5. many
+6. zero
+
+This default priority is filtered to include only categories of the locale, for example in english:
+
+1. other
+2. one
+
+Some languages may have a different default priority, see [locales.ts](https://github.com/nlepage/templural/blob/main/src/locales.ts).
+
+#### Category order
+
+Category order defines the order in which categories are valued (regardless of their priority).
+
+If order is:
+
+1. one
+2. many
+3. other
+
+Then
+
+```js
+// giving two values is one then other
+templural`${n} is {one;other}`
+
+// giving three values is one then many then other
+templural`${n} is {one;many;other}`
+```
+
+The default order (regardless of locale) is:
+
+1. zero
+2. one
+3. two
+4. few
+5. many
+6. other
+
+This default order is filtered to include only categories of the locale, for example in english:
+
+1. one
+2. other
+
+Some languages may have a different default order, see [locales.ts](https://github.com/nlepage/templural/blob/main/src/locales.ts).
+
+#### Category fallback
+
+**FIXME**
 
 ## ❓ FAQ
 
