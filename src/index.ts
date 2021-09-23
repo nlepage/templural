@@ -103,6 +103,8 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
 
 export type Locales = string | string[]
 
+export type { CategoriesFallbacks, LocalesOptions }
+
 function toString(v: any): string {
   return v == null ? '' : v.toString() // FIXME not sure
 }
