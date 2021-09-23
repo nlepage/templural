@@ -133,6 +133,28 @@ templural`There {$1;is;are} ${nbWhales} flying whale{s}`
 
 Use `$2`, `$3` or `$n` to reference the second, the third or the nth interpolated expression.
 
+### Associative syntax
+
+In some cases, associative syntax may be used to avoid empty values:
+
+```js
+templural`${nbDogs} dog{s} bark{s;} and ${nbCats} cat{s} meow{s;}`
+
+// may be replaced by
+
+templural`${nbDogs} dog{s} bark{one:s} and ${nbCats} cat{s} meow{one:s}`
+```
+
+**⚠️ Associative syntax must not be mixed with ordered syntax:**
+
+```js
+// this is OK:
+templural`${nbConnected} {one:person;other:people} {is;are} connected`
+
+// this is NOT OK:
+templural`${nbConnected} {one:person;people} {is;are} connected`
+```
+
 ## 🗣️ Internationalization
 
 templural is built on top of [Intl.PluralRules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) and may be used to format sentences in any language.
@@ -169,13 +191,13 @@ templural`${n} is in the {one;other;many} category`
 
 See [Language Plural Rules](https://unicode-org.github.io/cldr-staging/charts/latest/supplemental/language_plural_rules.html) for information about plural rules in any language.
 
-**FIXME API**
-
 templural's behavior may be customized using three mechanisms:
 
  - [Category priority](#category-priority)
  - [Category order](#category-order)
  - [Category fallback](#category-fallback)
+
+**FIXME API**
 
 ### Category priority
 
@@ -183,36 +205,36 @@ Category priority defines which categories are valued when not specifying values
 
 If priority is:
 
-1. many
-2. other
-3. one
+1. `many`
+2. `other`
+3. `one`
 
-Then
+Then:
 
 ```js
 // giving only one value is for category many
 templural`${n} is {many}`
 
-// giving two values is for categories many and other
+// giving two values is for categories other and many
 templural`${n} is {other;many}`
 
-// giving three values is for categories many, other and one
+// giving three values is for categories one, other and many
 templural`${n} is {one;other;many}`
 ```
 
 The default priority (regardless of locale) is:
 
-1. other
-2. one
-3. two
-4. few
-5. many
-6. zero
+1. `other`
+2. `one`
+3. `two`
+4. `few`
+5. `many`
+6. `zero`
 
 This default priority is filtered to include only categories of the locale, for example in english:
 
-1. other
-2. one
+1. `other`
+2. `one`
 
 Some languages may have a different default priority, see [locales.ts](https://github.com/nlepage/templural/blob/main/src/locales.ts).
 
@@ -222,33 +244,33 @@ Category order defines the order in which categories are valued (regardless of t
 
 If order is:
 
-1. one
-2. many
-3. other
+1. `many`
+2. `other`
+3. `one`
 
-Then
+Then:
 
 ```js
-// giving two values is one then other
-templural`${n} is {one;other}`
+// giving two values is other then one (many has a lower priority)
+templural`${n} is {other;one}`
 
-// giving three values is one then many then other
-templural`${n} is {one;many;other}`
+// giving three values is many then other then one
+templural`${n} is {many;other;one}`
 ```
 
 The default order (regardless of locale) is:
 
-1. zero
-2. one
-3. two
-4. few
-5. many
-6. other
+1. `zero`
+2. `one`
+3. `two`
+4. `few`
+5. `many`
+6. `other`
 
 This default order is filtered to include only categories of the locale, for example in english:
 
-1. one
-2. other
+1. `one`
+2. `other`
 
 Some languages may have a different default order, see [locales.ts](https://github.com/nlepage/templural/blob/main/src/locales.ts).
 
@@ -258,15 +280,15 @@ Some languages may have a different default order, see [locales.ts](https://gith
 
 ## ❓ FAQ
 
+### What about negative or floating numbers or any other value?
+
+templural doesn't care, it relies on [Intl.PluralRules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules).
+
 ### Any new features planned?
 
 Not for the moment.
 
 templural is simple and dumb, and it will probably stay like this.
-
-### What about negative or floating numbers?
-
-🚧 FIXME
 
 ### Any other questions?
 
