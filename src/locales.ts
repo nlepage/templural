@@ -1,14 +1,14 @@
 export const defaultLocalesOptions: { [key: string]: LocalesOptions } = {
   fr: {
-    categoriesFallbacks: { many: 'other' },
-    categoriesOrder: ['one', 'other', 'many'],
+    categoryFallback: { many: 'other' },
+    categoryOrder: ['one', 'other', 'many'],
   }
 }
 
 export type LocalesOptions = {
-  categoriesPriority?: Intl.LDMLPluralRule[],
-  categoriesOrder?: Intl.LDMLPluralRule[],
-  categoriesFallbacks?: CategoriesFallbacks,
+  categoryPriority?: Intl.LDMLPluralRule[],
+  categoryOrder?: Intl.LDMLPluralRule[],
+  categoryFallback?: CategoryFallback,
 }
 
-export type CategoriesFallbacks = { [key in Intl.LDMLPluralRule]?: Intl.LDMLPluralRule }
+export type CategoryFallback = { [key in Intl.LDMLPluralRule]?: Intl.LDMLPluralRule }

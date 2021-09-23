@@ -1,5 +1,5 @@
-import { buildCategories } from './categories'
-import { CategoriesFallbacks, defaultLocalesOptions, LocalesOptions } from './locales'
+import { resolveCategoryOrders } from './categories'
+import { CategoryFallback, defaultLocalesOptions, LocalesOptions } from './locales'
 
 export const templural = forLocales()
 
@@ -57,42 +57,45 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
 
     let categoryToResult: { [key in Intl.LDMLPluralRule]?: string }
     if (assocMatches.every(match => match == null)) {
-      categoryToResult = Object.fromEntries(categories[split.length - 1].map((c, i) => [c, split[i]]))
+      categoryToResult = Object.fromEntries(categoryOrders[split.length - 1].map((c, i) => [c, split[i]]))
     } else {
       if (assocMatches.some(match => match == null)) {
-        throw new Error('Implicit and associative syntaxes cannot be mixed')
+        throw new Error('Ordered and associative syntaxes cannot be mixed')
       }
       categoryToResult = Object.fromEntries(assocMatches.map(match => match.slice(1)))
+    }
+
+    for (const category of categories) {
+      if (category in categoryToResult || !(category in categoryFallback)) continue
+      categoryToResult[category] = categoryToResult[categoryFallback[category]]
     }
 
     return (args: any[]) => {
       const n = args[index - 1]
 
+      // FIXME try converting to number ?
       if (typeof n !== 'number') return ''
-  
-      let category = pluralRules.select(n)
-  
-      do {
-        if (category in categoryToResult) return categoryToResult[category]
-        category = categoriesFallbacks?.[category]
-      } while (category != null)
-  
-      return ''
+
+      return categoryToResult[pluralRules.select(n)] ?? ''
     }
   }
 
   let pluralRules: Intl.PluralRules
-  let categories: Intl.LDMLPluralRule[][]
-  let categoriesFallbacks: CategoriesFallbacks
+  let categories: Intl.LDMLPluralRule[]
+  let categoryOrders: Intl.LDMLPluralRule[][]
+  let categoryFallback: CategoryFallback
   const resolversCache = new Map<string, Resolver>()
 
   templural.setLocales = function setLocales(locales?: Locales, options?: LocalesOptions) {
     pluralRules = new Intl.PluralRules(locales)
 
-    const optionsWDefault = Object.assign({}, options, defaultLocalesOptions[pluralRules.resolvedOptions().locale])
+    const resolvedOptions = pluralRules.resolvedOptions()
+    const optionsWDefault = Object.assign({}, options, defaultLocalesOptions[resolvedOptions.locale])
 
-    categories = buildCategories(pluralRules, optionsWDefault)
-    categoriesFallbacks = optionsWDefault.categoriesFallbacks
+    categories = resolvedOptions.pluralCategories
+    categoryOrders = resolveCategoryOrders(categories, optionsWDefault)
+    categoryFallback = optionsWDefault.categoryFallback ?? {}
+
     resolversCache.clear()
 
     return templural
@@ -103,7 +106,7 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
 
 export type Locales = string | string[]
 
-export type { CategoriesFallbacks, LocalesOptions }
+export type { CategoryFallback, LocalesOptions }
 
 function toString(v: any): string {
   return v == null ? '' : v.toString() // FIXME not sure
@@ -112,5 +115,12 @@ function toString(v: any): string {
 function chunksToKey(chunks: TemplateStringsArray) {
   return chunks.raw.reduce((acc, chunk, i) => `${acc}\${${i}}${chunk}`)
 }
+
+type Template = {
+  chunks: readonly string[]
+  groups: readonly Group[]
+}
+
+type Group = { [key in Intl.LDMLPluralRule]?: string }
 
 type Resolver = (args: any[]) => string

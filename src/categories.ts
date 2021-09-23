@@ -1,27 +1,25 @@
-const defaultCategoriesPriority: Intl.LDMLPluralRule[] = ['other', 'one', 'two', 'few', 'many', 'zero']
+import { LocalesOptions } from "./locales"
 
-const defaultCategoriesOrder: Intl.LDMLPluralRule[] = ['zero', 'one', 'two', 'few', 'many', 'other']
+const defaultCategoryPriority: Intl.LDMLPluralRule[] = ['other', 'one', 'two', 'few', 'many', 'zero']
 
-export function buildCategories(
-  pluralRules: Intl.PluralRules,
-  options?: {
-    categoriesPriority?: Intl.LDMLPluralRule[],
-    categoriesOrder?: Intl.LDMLPluralRule[],
-  },
+const defaultCategoryOrder: Intl.LDMLPluralRule[] = ['zero', 'one', 'two', 'few', 'many', 'other']
+
+export function resolveCategoryOrders(
+  pluralCategories: Intl.LDMLPluralRule[],
+  options?: LocalesOptions,
 ): Intl.LDMLPluralRule[][] {
-  const { pluralCategories } = pluralRules.resolvedOptions()
   const {
-    categoriesPriority = defaultCategoriesPriority,
-    categoriesOrder = defaultCategoriesOrder
+    categoryPriority = defaultCategoryPriority,
+    categoryOrder = defaultCategoryOrder
   } = options ?? {}
 
   const categories: Intl.LDMLPluralRule[][] = []
 
-  categoriesPriority
+  categoryPriority
     .filter(c => pluralCategories.includes(c))
     .forEach(c => {
       categories.push(
-        [...(categories[categories.length - 1] ?? []), c].sort((c1, c2) => categoriesOrder.indexOf(c1) - categoriesOrder.indexOf(c2))
+        [...(categories[categories.length - 1] ?? []), c].sort((c1, c2) => categoryOrder.indexOf(c1) - categoryOrder.indexOf(c2))
       )
     })
 
