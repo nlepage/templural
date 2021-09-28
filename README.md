@@ -6,7 +6,7 @@
 [![Version](https://img.shields.io/npm/v/templural.svg)](https://www.npmjs.com/package/templural)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache2.0-yellow.svg)](https://spdx.org/licenses/Apache-2.0.html)
 
-[![README en français](https://img.shields.io/badge/🇫🇷-README-blue)](https://github.com/nlepage/templural/blob/main/README_fr.md)
+[![French README](https://img.shields.io/badge/🇫🇷-README-blue)](https://github.com/nlepage/templural/blob/main/README_fr.md)
 
 ## Usage
 
@@ -149,15 +149,19 @@ templural`${nbDogs} dog{s} bark{one:s} and ${nbCats} cat{s} meow{one:s}`
 
 ```js
 // this is OK:
-templural`${nbConnected} {one:person;other:people} {is;are} connected`
+templural`${nbConnected} {one:person;other:people} connected`
 
 // this is NOT OK:
-templural`${nbConnected} {one:person;people} {is;are} connected`
+templural`${nbConnected} {one:person;people} connected`
 ```
 
 ## 🗣️ Internationalization
 
 templural is built on top of [Intl.PluralRules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) and may be used to format sentences in any language.
+
+This README is available in the following other languages:
+
+ - [🇫🇷 French](https://github.com/nlepage/templural/blob/main/README_fr.md)
 
 ### Plural rules
 
@@ -276,7 +280,16 @@ Some languages may have a different default order, see [locales.ts](https://gith
 
 ### Category fallback
 
-**FIXME**
+Certain languages may need a category to fallback to another category.
+
+For example in French, `many` behaves like a sub-category of `other`, which means `many` needs to fallback to `other`:
+
+```js
+templural`${1000000} is {one;other;many} and falls back to {one;other}`
+// ➔ "1000000 is many and falls back to other"
+```
+
+Some languages may have default fallbacks, see [locales.ts](https://github.com/nlepage/templural/blob/main/src/locales.ts).
 
 ## ❓ FAQ
 
