@@ -201,7 +201,7 @@ templural's behavior may be customized using three mechanisms:
  - [Category order](#category-order)
  - [Category fallback](#category-fallback)
 
-**FIXME API**
+`templural.setLocales()` and `forLocales()` accept `LocalesOptions` as second parameter, see [locales.ts](https://github.com/nlepage/templural/blob/main/src/locales.ts)
 
 ### Category priority
 
@@ -319,6 +319,8 @@ Special thanks go to [Valentin Cocaud](https://github.com/EmrysMyrddin) and [Yoa
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/nlepage/templural/issues).
+
+In the interest of fostering an open and welcoming environment, we have adopted [a Code of Conduct](https://github.com/nlepage/templural/blob/main/CODE_OF_CONDUCT.md) that we expect project participants to commit to. Please read the full text so that you can understand what behavior will and will not be tolerated.
 
 ## Show your support
 
