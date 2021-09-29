@@ -1,12 +1,12 @@
 # templural 🍤
 
-**Fonction de template pour accorder les pluriels dans les phrases.**
+**Fonction de template pour le formatage de texte sensible aux accords pluriels.**
 
 [![CI](https://github.com/nlepage/templural/actions/workflows/ci.yml/badge.svg)](https://github.com/nlepage/templural/actions)
 [![Version](https://img.shields.io/npm/v/templural.svg)](https://www.npmjs.com/package/templural)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache2.0-yellow.svg)](https://spdx.org/licenses/Apache-2.0.html)
 
-[![English README](https://img.shields.io/badge/🇬🇧-README-blue)](https://github.com/nlepage/templural#readme)
+[![README en anglais](https://img.shields.io/badge/🇬🇧-README-blue)](https://github.com/nlepage/templural#readme)
 
 ## Utilisation
 
@@ -34,15 +34,40 @@ ou
 const { templural } = require('templural')
 ```
 
+### Choisir une locale
+
+templural utilise [Intl.PluralRules](https://developer.mozilla.org/fr-FR/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) pour savoir quelle règle d'accord appliquer pour un nombre donné, et les règles d'accord varient selon la langue.
+
+Cela signifie que **vous devez définir la locale utilisée par templural** afin de formater des phrases correctes.
+
+Soit définir la locale par défaut :
+
+```js
+templural.setLocales('fr_BE') // Français (Belgique)
+```
+
+soit créer une nouvelle fonction de template pour une locale spécifique :
+
+
+```js
+import { forLocales } from 'templural'
+
+const templuralDeCH = forLocales('de_CH') // Allemand (Suisse)
+```
+
+Pour plus d'informations sur les valeurs acceptées par `templural.setLocales()` et `forLocales()` voir [Argument locales](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl#argument_locales).
+
+Les exemples suivants sont spécifiques au Français, voir [Internationalisation](#%EF%B8%8F-internationalisation) pour des informations sur les autres langues.
+
 ### Accorder un mot avec nombre le précédant
 
 ```js
 templural`Yoann et Valentin ont eu ${nbIdees} idée{s}`
 
-// nbIdees = 1 ➔ "Yoann et Valentin ont eu 1 idée"
-// nbIdees = 2 ➔ "Yoann et Valentin ont eu 2 idées"
+// nbIdees = 1  ➔ "Yoann et Valentin ont eu 1 idée"
+// nbIdees = 2  ➔ "Yoann et Valentin ont eu 2 idées"
 // nbIdees = 42 ➔ "Yoann et Valentin ont eu 42 idées"
-// nbIdees = 0 ➔ "Yoann et Valentin ont eu 0 idée"
+// nbIdees = 0  ➔ "Yoann et Valentin ont eu 0 idée"
 ```
 
 ### Insérer n'importe quelle autre valeur dans le texte
@@ -50,7 +75,7 @@ templural`Yoann et Valentin ont eu ${nbIdees} idée{s}`
 ```js
 templural`${nomUtilisateur} a ${nbPoints} point{s}`
 
-// nomUtilisateur = "Joe", nbPoints = 1 ➔ "Joe a 1 point"
+// nomUtilisateur = "Joe",   nbPoints = 1    ➔ "Joe a 1 point"
 // nomUtilisateur = "Mario", nbPoints = 1000 ➔ "Mario a 1000 points"
 ```
 
@@ -64,7 +89,7 @@ templural`J'ai juste pris ${nbPintes} petite{s} bière{s} chéri·e, {z}je te ju
 // nbPintes = 6 ➔ "J'ai juste pris 6 petites bières chéri·e, zje te jure"
 ```
 
-### Accorder plusieurs mots chacun avec un nombre différent
+### Accorder plusieurs mots chacun avec un nombre différent le précédent
 
 ```js
 templural`J'ai acheté ${nbCarottes} carotte{s} et ${nbPatates} patate{s}`
@@ -75,17 +100,17 @@ templural`J'ai acheté ${nbCarottes} carotte{s} et ${nbPatates} patate{s}`
 // nbCarottes = 2, nbPatates = 3 ➔ "J'ai acheté 2 carottes et 3 patates"
 ```
 
-### Mots avec une forme différentes au singulier et au pluriel
+### Mots avec une forme différente au singulier et au pluriel
 
 ```js
 templural`${nbConnectes} personne{s} {est;sont} connecté{s}`
 
-// nbConnectes = 1 ➔ "1 personne est connectée"
-// nbConnectes = 2 ➔ "2 personnes sont connectées"
+// nbConnectes = 1   ➔ "1 personne est connectée"
+// nbConnectes = 2   ➔ "2 personnes sont connectées"
 // nbConnectes = 666 ➔ "666 personnes sont connectées"
 ```
 
-### Un mélange de tous les exemples précédents
+### Mélanger tous les exemples précédents
 
 ```js
 templural`${nbChevaux} cheva{l;ux} {a;ont} ${nbChevaux} tête{s}, ${nbChevaux * 2} {oeil;yeux} et ${nbChevaux * 4} patte{s}`
@@ -107,100 +132,97 @@ templural`Dans le ciel vole{$1;nt} ${nbWhales} baleine{s}`
 
 `$2`, `$3` ou `$n` peuvent être utilisés pour référencer la deuxième, troisième ou énième expression interpolée.
 
+### Accorder avec des grands nombres
+
+```js
+templural`${nbPersonnes}{;; de} personne{s} connectée{s}`
+
+// nbConnectes = 1       ➔ "1 personne connectée"
+// nbConnectes = 2       ➔ "2 personnes connectées"
+// nbConnectes = 1000000 ➔ "1000000 de personnes connectées"
+```
+
+### Syntaxe associative
+
+Dans certains cas, la syntaxe associative peut être utilisée pour éviter les valeurs vides :
+
+```js
+templural`${nbPersonnes}{;; de} personne{s} connectée{s}`
+
+// peut être remplacé par
+
+templural`${nbPersonnes}{many: de} personne{s} connectée{s}`
+```
+
+**⚠️ La syntaxe associative et la syntaxe ordonnée ne doivent pas être mélangées:**
+
+```js
+// Correct:
+templural`${nbCheval} cheva{one:l;other:ux}`
+
+// Erroné:
+templural`${nbCheval} cheva{one:l;ux}`
+```
+
 ## 🗣️ Internationalisation
 
-**⚠ Cette section est obsolète et doit être mise à jour ! ⚠**
+templural est construit sur la base de [Intl.PluralRules](https://developer.mozilla.org/fr-FR/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) et peut être utilisé pour formater des phrases dans n'importe quelle langue.
 
-templural est conçu pour être adaptable à n'importe quelle langue.
+Ce README est disponible dans les langues suivantes :
 
-### Number ranges
+ - [🇬🇧 Anglais](https://github.com/nlepage/templural#readme)
 
-templural utilise des plages de nombres pour définir quoi faire, du moins au plus explicite :
+### Règles d'accord
 
-```js
-templural`${n}{a}`
-// ➔ Choisit "a" si n >= 2
+Chaque langue a des règles d'accord différentes.
 
-templural`${n}{a;b}`
-// ➔ Choisit "a" si 1 <= n < 2
-// ➔ Choisit "b" si n >= 2
-
-templural`${n}{a;b;c}`
-// ➔ Choisit "a" si 0 <= n < 1
-// ➔ Choisit "b" si 1 <= n < 2
-// ➔ Choisit "c" si n >= 2
-```
-
-Lorsqu'une forme moins explicite est utilisée, templural utilise les [plural rules](#plural-rules) pour choisir quoi faire.
-
-Il est possible de modifier les plages de nombres utilisées par templural, soit en modifiant les plages par défaut :
+Par exemple le français a trois catégories d'accord, `"one"` pour les singulier, `"other"` pour le pluriel, et `"many"` pour certains grands nombres :
 
 ```js
-templural.setRanges(...)
+templural.setLocales('fr')
+
+templural`${n} est dans la catégorie {one;other;many}`
+
+// n = 1       ➔ "1 est dans la catégorie one"
+// n = 2       ➔ "2 est dans la catégorie other"
+// n = 1000000 ➔ "1000000 est dans la catégorie many"
+// n = 0       ➔ "0 est dans la catégorie one"
 ```
 
-soit en créant une nouvelle fonction de template avec des plages spécifiques :
-
-```js
-import { forRanges } from 'templural'
-
-const templuralCustom = forRanges(...)
-```
-
-Les plages par défaut utilisées par templural sont définies dans [`index.ts`](https://github.com/nlepage/templural/blob/ef1e75601049b545637ba8c2b4ce36ee3e8a6f18/src/index.ts#L8).
-
-### Plural rules
-
-templural utilise [`Intl.PluralRules`](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) pour choisir quoi faire quand cela n'est pas spécifié explicitement.
-
-Par exemple, zéro est pluriel en anglais alors qu'il est singulier en français :
+L'anglais est un peu différent du français, il n'a que les deux catégories `"one"` et `"other"`, et le 0 est pluriel :
 
 ```js
 templural.setLocales('en')
-templural`You have ${0} message{s}` // ➔ "You have 0 messages"
 
-templural.setLocales('fr')
-templural`Vous avez ${0} message{s}` // ➔ "Vous avez 0 message"
+templural`${n} est dans la catégorie {one;other}`
+
+// n = 1       ➔ "1 est dans la catégorie one"
+// n = 2       ➔ "2 est dans la catégorie other"
+// n = 1000000 ➔ "1000000 est dans la catégorie other"
+// n = 0       ➔ "0 est dans la catégorie other"
 ```
 
-Il est donc recommandé de sélectionner la bonne langue lorsqu'on utilise templural afin d'éviter les erreurs.
+Voir [Language Plural Rules](https://unicode-org.github.io/cldr-staging/charts/latest/supplemental/language_plural_rules.html) pour des informations sur les règles d'accord dans n'importe quelle autre langue.
 
-Cependant il est possible de spécifier explicitement quoi faire dans tous les cas, et d'éviter de reposer sur `Intl.PluralRules` :
+Le comportement de templural peut être personnalisé en utilisant trois mécanismes :
 
-```js
-// Cette phrase en français sera correcte même si la langue sélectionnée est l'anglais
-templural`Vous avez ${0} message{;;s}` // ➔ "Vous avez 0 message"
-```
+ - Priorité de catégorie
+ - Ordre de catégorie
+ - *Fallback* de catégorie
 
-#### Sélectionner la langue
-
-Il est possible de sélectionner la langue utilisée par templural, soit en changeant la langue par défaut :
-
-```js
-templural.setLocales('fr_BE') // Français (Belgique)
-```
-
-ou en créant une nouvelle fonction de template pour une langue spécifique :
-
-```js
-import { forLocales } from 'templural'
-
-const templuralDeCH = forLocales('de_CH') // Allemand (Suisse)
-```
-
-Pour plus d'informations sur les valeurs acceptées par `templural.setLocales()` et `forLocales()` voir l'[argument locales](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl#argument_locales).
+**FIXME finir la traduction de cette section**
 
 ## ❓ FAQ
+
+### Et les nombres négatifs ou flottants ?
+
+templural s'en fiche, il se base sur [Intl.PluralRules](https://developer.mozilla.org/fr-FR/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules).
 
 ### De nouvelles features sont-elles prévues ?
 
 Pas pour le moment.
 
 templural est simple et bête, et il va probablement le rester.
-
-### Et les nombres négatifs ou flottants alors ?
-
-🚧 FIXME
 
 ### D'autres questions ?
 
@@ -219,11 +241,11 @@ Remerciements particuliers à [Valentin Cocaud](https://github.com/EmrysMyrddin)
 
 Les contributions, issues et demande de feature sont les bienvenues !<br />N'hésitez pas à consulter les [issues](https://github.com/nlepage/templural/issues).
 
-## Show your support
+## Montrez votre soutien
 
 Lachez une ⭐️ et/ou sponsororisez si ce projet vous a aidé !
 
-## 📝 License
+## 📝 Licence
 
 Copyright © 2021 [Nicolas Lepage](https://github.com/nlepage).<br />
 Ce projet est sous licence [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html).
