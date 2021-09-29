@@ -48,4 +48,11 @@ test.failing('Escaping special chars', t => {
   t.is(templural`This is a test{s\\}}`, 'This is a test')
 })
 
-test.todo('fallback chain')
+test.failing('Fallback chain', t => {
+  const fr = forLocales('fr', { categoryFallback: {
+    many: 'one',
+    one: 'other',
+  } })
+
+  t.is(fr`${1000000} is {one;other;many} and falls back to {one;other} or {other}`, '1000000 is many and falls back to one or other')
+})
