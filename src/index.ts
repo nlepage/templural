@@ -95,7 +95,7 @@ export function forLocales(locales?: Locales, options?: LocalesOptions) {
     pluralRules = new Intl.PluralRules(locales)
 
     const resolvedOptions = pluralRules.resolvedOptions()
-    const optionsWDefault = Object.assign({}, options, defaultLocalesOptions[resolvedOptions.locale])
+    const optionsWDefault = Object.assign({}, defaultLocalesOptions[resolvedOptions.locale], options)
 
     categories = resolvedOptions.pluralCategories
     categoryOrders = resolveCategoryOrders(categories, optionsWDefault)

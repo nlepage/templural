@@ -48,7 +48,7 @@ test.failing('Escaping special chars', t => {
   t.is(templural`This is a test{s\\}}`, 'This is a test')
 })
 
-test.failing('Fallback chain', t => {
+test('Fallback chain', t => {
   const fr = forLocales('fr', { categoryFallback: {
     many: 'one',
     one: 'other',
