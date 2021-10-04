@@ -329,9 +329,9 @@ Remerciements particuliers à [Valentin Cocaud](https://github.com/EmrysMyrddin)
 
 ## 🤝 Contribuer
 
-Les contributions, issues et demandes de feature sont les bienvenues !<br />N'hésitez pas à consulter les [issues](https://github.com/nlepage/templural/issues).
+Les contributions, issues et demandes de feature sont les bienvenues !<br />Consultez notre [Contributing guide](https://github.com/nlepage/templural/blob/main/docs/CONTRIBUTING.md) pour plus d'informations.
 
-Afin de favoriser un environnement ouvert et accueillant, nous avons adopté [un code de conduite](https://github.com/nlepage/tempural/blob/main/CODE_OF_CONDUCT.md) que les participants au projet s'engagent à respecter. Merci de lire le texte complet afin de comprendre quels comportements seront et ne seront pas tolérés.
+Afin de favoriser un environnement ouvert et accueillant, nous avons adopté [un code de conduite](https://github.com/nlepage/tempural/blob/main/docs/CODE_OF_CONDUCT.md) que les participants au projet s'engagent à respecter. Merci de lire le texte complet afin de comprendre quels comportements seront et ne seront pas tolérés.
 
 ## Montrez votre soutien
 

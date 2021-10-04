@@ -39,6 +39,5 @@
     "require": [
       "ts-node/register"
     ]
-  },
-  "dependencies": {}
+  }
 }

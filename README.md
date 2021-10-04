@@ -6,7 +6,7 @@
 [![Version](https://img.shields.io/npm/v/templural.svg)](https://www.npmjs.com/package/templural)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache2.0-yellow.svg)](https://spdx.org/licenses/Apache-2.0.html)
 
-[![French README](https://img.shields.io/badge/🇫🇷-README-blue)](https://github.com/nlepage/templural/blob/main/README_fr.md)
+[![French README](https://img.shields.io/badge/🇫🇷-README-blue)](https://github.com/nlepage/templural/blob/main/docs/README_fr.md)
 
 ## Usage
 
@@ -161,7 +161,7 @@ templural is built on top of [Intl.PluralRules](https://developer.mozilla.org/en
 
 This README is available in the following other languages:
 
- - [🇫🇷 French](https://github.com/nlepage/templural/blob/main/README_fr.md)
+ - [🇫🇷 French](https://github.com/nlepage/templural/blob/main/docs/README_fr.md)
 
 ### Plural rules
 
@@ -318,9 +318,9 @@ Special thanks go to [Valentin Cocaud](https://github.com/EmrysMyrddin) and [Yoa
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/nlepage/templural/issues).
+Contributions, issues and feature requests are welcome! Check out our [Contributing guide](https://github.com/nlepage/templural/blob/main/docs/CONTRIBUTING.md) for more information.
 
-In the interest of fostering an open and welcoming environment, we have adopted [a Code of Conduct](https://github.com/nlepage/templural/blob/main/CODE_OF_CONDUCT.md) that we expect project participants to commit to. Please read the full text so that you can understand what behavior will and will not be tolerated.
+In the interest of fostering an open and welcoming environment, we have adopted [a Code of Conduct](https://github.com/nlepage/templural/blob/main/docs/CODE_OF_CONDUCT.md) that we expect project participants to commit to. Please read the full text so that you can understand what behavior will and will not be tolerated.
 
 ## Show your support
 
