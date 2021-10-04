@@ -57,7 +57,7 @@ const templuralDeCH = forLocales('de_CH') // Allemand (Suisse)
 
 Pour plus d'informations sur les valeurs acceptées par `templural.setLocales()` et `forLocales()` voir [Argument locales](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl#argument_locales).
 
-Les exemples suivants sont spécifiques au Français, voir [Internationalisation](#%EF%B8%8F-internationalisation) pour des informations sur les autres langues.
+Les exemples suivants sont spécifiques au français, voir [Internationalisation](#%EF%B8%8F-internationalisation) pour des informations sur les autres langues.
 
 ### Accorder un mot avec nombre le précédant
 
@@ -206,17 +206,107 @@ Voir [Language Plural Rules](https://unicode-org.github.io/cldr-staging/charts/l
 
 Le comportement de templural peut être personnalisé en utilisant trois mécanismes :
 
- - Priorité de catégorie
- - Ordre de catégorie
- - *Fallback* de catégorie
+ - [Priorité des catégories](#priorité-des-catégories)
+ - [Ordre des catégories](#ordre-des-catégories)
+ - [*Fallback* de catégorie](#fallback-de-catégorie)
 
-**FIXME finir la traduction de cette section**
+`templural.setLocales()` et `forLocales()` acceptent `LocalesOptions` comme second paramètre, voir [locales.ts](https://github.com/nlepage/templural/blob/main/src/locales.ts).
+
+### Priorité des catégories
+
+La priorité des catégories définit quelles catégories sont valorisées quand des valeurs ne sont pas spécifiées pour toutes les catégories.
+
+Si la priorité est :
+
+1. `many`
+2. `other`
+3. `one`
+
+Alors :
+
+```js
+// une seule valeur spécifiée est pour la catégorie many
+templural`${n} is {many}`
+
+// deux valeurs spécifiées sont pour les catégories other et many
+templural`${n} is {other;many}`
+
+// trois valeurs spécifiées sont pour les catégories one, other et many
+templural`${n} is {one;other;many}`
+```
+
+La priorité par défaut (indépendamment de la locale) est :
+
+1. `other`
+2. `one`
+3. `two`
+4. `few`
+5. `many`
+6. `zero`
+
+Cette priorité par défaut est filtrée pour n'inclure que les catégories de la locale sélectionnée, par exemple en français :
+
+1. `other`
+2. `one`
+3. `many`
+
+Certaines langues peuvent avoir une priorité par défaut différente, voir [locales.ts](https://github.com/nlepage/templural/blob/main/src/locales.ts).
+
+### Ordre des catégories
+
+L'ordre des catégories définit dans quelle ordre les catégories sont valorisées (indépendamment de leur priorité).
+
+Si l'ordre est :
+
+1. `many`
+2. `other`
+3. `one`
+
+Alors :
+
+```js
+// deux valeurs spécifiées sont pour other puis one (many a une priorité basse)
+templural`${n} is {other;one}`
+
+// trois valeurs spécifiées sont pour many puis other puis one
+templural`${n} is {many;other;one}`
+```
+
+L'ordre par défaut (indépendamment de la locale) est :
+
+1. `zero`
+2. `one`
+3. `two`
+4. `few`
+5. `many`
+6. `other`
+
+Cette ordre par défaut est filtré pour n'inclure que les catégories de la locale sélectionnée.
+
+Certaines langues peuvent avoir un ordre par défaut différent, voir [locales.ts](https://github.com/nlepage/templural/blob/main/src/locales.ts), c'est le cas du français :
+
+1. `one`
+2. `other`
+3. `many`
+
+### *Fallback* de catégorie
+
+Certaines langues peuvent nécessiter qu'une catégorie "retombe" sur une autre catégorie.
+
+Par exemple em français, `many` se comporte comme une sous-catégorie de `other`, autrement dit `many` retombe sur `other` :
+
+```js
+templural`${1000000} est dans {one;other;many} et retombent dans {one;other}`
+// ➔ "1000000 est dans many et retombent dans other"
+```
+
+Certaines langues peuvent avoir des *fallbacks* par défaut, voir [locales.ts](https://github.com/nlepage/templural/blob/main/src/locales.ts), c'est le cas du français.
 
 ## ❓ FAQ
 
 ### Et les nombres négatifs ou flottants ?
 
-templural s'en fiche, il se base sur [Intl.PluralRules](https://developer.mozilla.org/fr-FR/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules).
+templural s'en fiche, il repose sur [Intl.PluralRules](https://developer.mozilla.org/fr-FR/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules).
 
 ### De nouvelles features sont-elles prévues ?
 
@@ -239,7 +329,9 @@ Remerciements particuliers à [Valentin Cocaud](https://github.com/EmrysMyrddin)
 
 ## 🤝 Contribuer
 
-Les contributions, issues et demande de feature sont les bienvenues !<br />N'hésitez pas à consulter les [issues](https://github.com/nlepage/templural/issues).
+Les contributions, issues et demandes de feature sont les bienvenues !<br />N'hésitez pas à consulter les [issues](https://github.com/nlepage/templural/issues).
+
+Afin de favoriser un environnement ouvert et accueillant, nous avons adopté [un code de conduite](https://github.com/nlepage/tempural/blob/main/CODE_OF_CONDUCT.md) que les participants au projet s'engagent à respecter. Merci de lire le texte complet afin de comprendre quels comportements seront et ne seront pas tolérés.
 
 ## Montrez votre soutien
 

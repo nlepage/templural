@@ -201,11 +201,11 @@ templural's behavior may be customized using three mechanisms:
  - [Category order](#category-order)
  - [Category fallback](#category-fallback)
 
-`templural.setLocales()` and `forLocales()` accept `LocalesOptions` as second parameter, see [locales.ts](https://github.com/nlepage/templural/blob/main/src/locales.ts)
+`templural.setLocales()` and `forLocales()` accept `LocalesOptions` as second parameter, see [locales.ts](https://github.com/nlepage/templural/blob/main/src/locales.ts).
 
 ### Category priority
 
-Category priority defines which categories are valued when not specifying values for all categories.
+Category priority defines which categories are valued when not giving values for all categories.
 
 If priority is:
 
@@ -235,7 +235,7 @@ The default priority (regardless of locale) is:
 5. `many`
 6. `zero`
 
-This default priority is filtered to include only categories of the locale, for example in english:
+This default priority is filtered to include only categories of the selected locale, for example in English:
 
 1. `other`
 2. `one`
@@ -271,7 +271,7 @@ The default order (regardless of locale) is:
 5. `many`
 6. `other`
 
-This default order is filtered to include only categories of the locale, for example in english:
+This default order is filtered to include only categories of the locale, for example in English:
 
 1. `one`
 2. `other`
