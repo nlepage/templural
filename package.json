@@ -11,7 +11,10 @@
   },
   "license": "Apache-2.0",
   "keywords": [
+    "i18n",
+    "internationalization",
     "template-literals",
+    "plural-rules",
     "pluralize"
   ],
   "files": [
