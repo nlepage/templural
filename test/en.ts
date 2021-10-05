@@ -18,9 +18,9 @@ test('Insert any other values in the text', t => {
 })
 
 test('Match several words to the same preceding number', t => {
-  t.is(templural`I just had ${1} bear{s} darling{s}, I swear{s}`, 'I just had 1 bear darling, I swear')
-  t.is(templural`I just had ${2} bear{s} darling{s}, I swear{s}`, 'I just had 2 bears darlings, I swears')
-  t.is(templural`I just had ${6} bear{s} darling{s}, I swear{s}`, 'I just had 6 bears darlings, I swears')
+  t.is(templural`I just had ${1} beer{s} darling{s}, I swear{s}`, 'I just had 1 beer darling, I swear')
+  t.is(templural`I just had ${2} beer{s} darling{s}, I swear{s}`, 'I just had 2 beers darlings, I swears')
+  t.is(templural`I just had ${6} beer{s} darling{s}, I swear{s}`, 'I just had 6 beers darlings, I swears')
 })
 
 test('Match several words each to a different preceding number', t => {
