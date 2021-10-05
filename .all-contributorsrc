@@ -1,10 +1,29 @@
 {
   "files": [
-    "README.md"
+    "README.md",
+    "docs/README_fr.md"
   ],
   "imageSize": 100,
   "commit": false,
   "contributors": [
+    {
+      "login": "EmrysMyrddin",
+      "name": "Valentin Cocaud",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3855602?v=4",
+      "profile": "https://github.com/EmrysMyrddin",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "Taranys",
+      "name": "Yoann Prot",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4621525?v=4",
+      "profile": "https://github.com/Taranys",
+      "contributions": [
+        "ideas"
+      ]
+    },
     {
       "login": "SvA1",
       "name": "Svetlana A.",
