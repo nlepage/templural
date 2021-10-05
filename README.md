@@ -311,14 +311,13 @@ templural is simple and dumb, and it will probably stay like this.
 
 Use the [Discussions tab](https://github.com/nlepage/templural/discussions).
 
-## Authors & Contributors
+## Contributors ✨
 
-Special thanks go to [Valentin Cocaud](https://github.com/EmrysMyrddin) and [Yoann Prot](https://github.com/Taranys) for their original idea behind templural.
-
-👤 **Author: Nicolas Lepage**
-
-* Twitter: [@njblepage](https://twitter.com/njblepage)
-* Github: [@nlepage](https://github.com/nlepage)
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/SvA1"><img src="https://avatars.githubusercontent.com/u/19571875?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nicolas Lepage</b></sub></a><br /><a href="https://github.com/nlepage/templural/commits?author=nlepage" title="Author">✍️</a></td>
+  </tr>
+</table>
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
@@ -329,6 +328,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/SvA1"><img src="https://avatars.githubusercontent.com/u/41849274?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Svetlana A.</b></sub></a><br /><a href="https://github.com/nlepage/templural/commits?author=SvA1" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/EmrysMyrddin"><img src="https://avatars.githubusercontent.com/u/3855602?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Valentin Cocaud</b></sub></a><br /><a href="#ideas-EmrysMyrddin" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/Taranys"><img src="https://avatars.githubusercontent.com/u/4621525?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Yoann Prot</b></sub></a><br /><a href="#ideas-Taranys" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 
