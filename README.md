@@ -1,13 +1,14 @@
 # templural 🍤
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 **Template function for plural-sensitive formatting.**
 
 [![CI](https://github.com/nlepage/templural/actions/workflows/ci.yml/badge.svg)](https://github.com/nlepage/templural/actions)
 [![Version](https://img.shields.io/npm/v/templural.svg)](https://www.npmjs.com/package/templural)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache2.0-yellow.svg)](https://spdx.org/licenses/Apache-2.0.html)
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![French README](https://img.shields.io/badge/🇫🇷-README-blue)](https://github.com/nlepage/templural/blob/main/docs/README_fr.md)
 
@@ -314,27 +315,10 @@ Use the [Discussions tab](https://github.com/nlepage/templural/discussions).
 
 Special thanks go to [Valentin Cocaud](https://github.com/EmrysMyrddin) and [Yoann Prot](https://github.com/Taranys) for their original idea behind templural.
 
-👤 **Nicolas Lepage**
+👤 **Author: Nicolas Lepage**
 
 * Twitter: [@njblepage](https://twitter.com/njblepage)
 * Github: [@nlepage](https://github.com/nlepage)
-
-## 🤝 Contributing
-
-Contributions, issues and feature requests are welcome! Check out our [Contributing guide](https://github.com/nlepage/templural/blob/main/docs/CONTRIBUTING.md) for more information.
-
-In the interest of fostering an open and welcoming environment, we have adopted [a Code of Conduct](https://github.com/nlepage/templural/blob/main/docs/CODE_OF_CONDUCT.md) that we expect project participants to commit to. Please read the full text so that you can understand what behavior will and will not be tolerated.
-
-## Show your support
-
-Give a ⭐️ and/or sponsor if this project helped you!
-
-## 📝 License
-
-Copyright © 2021 [Nicolas Lepage](https://github.com/nlepage).<br />
-This project is [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html) licensed.
-
-## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
@@ -353,3 +337,18 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome! Check out our [Contributing guide](https://github.com/nlepage/templural/blob/main/docs/CONTRIBUTING.md) for more information.
+
+In the interest of fostering an open and welcoming environment, we have adopted [a Code of Conduct](https://github.com/nlepage/templural/blob/main/docs/CODE_OF_CONDUCT.md) that we expect project participants to commit to. Please read the full text so that you can understand what behavior will and will not be tolerated.
+
+## Show your support
+
+Give a ⭐️ and/or sponsor if this project helped you!
+
+## 📝 License
+
+Copyright © 2021 [Nicolas Lepage](https://github.com/nlepage).<br />
+This project is [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html) licensed.
