@@ -81,11 +81,11 @@ templural`${userName} has ${nbPoints} point{s}`
 ### Match several words to the same preceding number
 
 ```js
-templural`I just had ${nbPints} bear{s} darling{s}, I swear{s}`
+templural`I just had ${nbPints} beer{s} darling{s}, I swear{s}`
 
-// nbPints = 1 ➔ "I just had 1 bear darling, I swear"
-// nbPints = 2 ➔ "I just had 2 bears darlings, I swears"
-// nbPints = 6 ➔ "I just had 6 bears darlings, I swears"
+// nbPints = 1 ➔ "I just had 1 beer darling, I swear"
+// nbPints = 2 ➔ "I just had 2 beers darlings, I swears"
+// nbPints = 6 ➔ "I just had 6 beers darlings, I swears"
 ```
 
 ### Match several words each to a different preceding number
