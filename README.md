@@ -6,6 +6,10 @@
 [![Version](https://img.shields.io/npm/v/templural.svg)](https://www.npmjs.com/package/templural)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache2.0-yellow.svg)](https://spdx.org/licenses/Apache-2.0.html)
 
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 [![French README](https://img.shields.io/badge/🇫🇷-README-blue)](https://github.com/nlepage/templural/blob/main/docs/README_fr.md)
 [![German README](https://img.shields.io/badge/🇩🇪-README-blue)](https://github.com/nlepage/templural/blob/main/docs/README_de.md)
 
@@ -82,11 +86,11 @@ templural`${userName} has ${nbPoints} point{s}`
 ### Match several words to the same preceding number
 
 ```js
-templural`I just had ${nbPints} bear{s} darling{s}, I swear{s}`
+templural`I just had ${nbPints} beer{s} darling{s}, I swear{s}`
 
-// nbPints = 1 ➔ "I just had 1 bear darling, I swear"
-// nbPints = 2 ➔ "I just had 2 bears darlings, I swears"
-// nbPints = 6 ➔ "I just had 6 bears darlings, I swears"
+// nbPints = 1 ➔ "I just had 1 beer darling, I swear"
+// nbPints = 2 ➔ "I just had 2 beers darlings, I swears"
+// nbPints = 6 ➔ "I just had 6 beers darlings, I swears"
 ```
 
 ### Match several words each to a different preceding number
@@ -313,10 +317,28 @@ Use the [Discussions tab](https://github.com/nlepage/templural/discussions).
 
 Special thanks go to [Valentin Cocaud](https://github.com/EmrysMyrddin) and [Yoann Prot](https://github.com/Taranys) for their original idea behind templural.
 
-👤 **Nicolas Lepage**
+👤 **Author: Nicolas Lepage**
 
 * Twitter: [@njblepage](https://twitter.com/njblepage)
 * Github: [@nlepage](https://github.com/nlepage)
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/SvA1"><img src="https://avatars.githubusercontent.com/u/41849274?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Svetlana A.</b></sub></a><br /><a href="https://github.com/nlepage/templural/commits?author=SvA1" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 ## 🤝 Contributing
 
