@@ -204,9 +204,9 @@ Siehe [Pluralregeln der Sprachen](https://unicode-org.github.io/cldr-staging/cha
 
 Das Verhalten von templural kann über drei Mechanismen angepasst werden:
 
- - [Kategoriepriorität](#category-priority)
- - [Kategoriereihenfolge](#category-order)
- - [Kategorie Fallback](#category-fallback)
+ - [Kategoriepriorität](#kategoriepriorit%C3%A4t)
+ - [Kategoriereihenfolge](#kategoriereihenfolge)
+ - [Kategorie Fallback](#kategorie-fallback)
 
 `templural.setLocales()` und `forLocales()` akzeptieren `LocalesOptions` als zweiten Parameter, siehe [locales.ts](https://github.com/nlepage/templural/blob/main/src/locales.ts).
 
