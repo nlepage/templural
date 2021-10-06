@@ -164,7 +164,7 @@ templural`${nbVerbunden} {one:Person;Menschen} verbunden`
 
 ## 🗣️ Internationalisierung
 
-templural ist auf [Intl.PluralRegeln](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) basiert and kann zur Formatierung von Sätzen in jeder Sprache verwendet werden.
+templural ist auf [Intl.PluralRules](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) basiert und kann zur Formatierung von Sätzen in jeder Sprache verwendet werden.
 
 Diese README ist in den folgenden anderen Sprachen verfügbar:
 
