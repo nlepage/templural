@@ -60,7 +60,7 @@ import { forLocales } from 'templural'
 const templuralDeCH = forLocales('de_CH') // Deutsch (Schweiz)
 ```
 
-Für weitere Informationen über die Werte, die von `templural.setLocales()` und `forLocales()` siehe [locales argument](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument).
+Für weitere Informationen über die Werte, die von `templural.setLocales()` und `forLocales()` siehe [locales argument](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument).
 
 Die folgenden Beispiele sind spezifisch für die deutsche Sprache, siehe [Internationalisierung](#%EF%B8%8F-internationalisierung) für Informationen über andere Sprachen.
 
