@@ -170,7 +170,6 @@ Diese README ist in den folgenden anderen Sprachen verfügbar:
 
  - [🇬🇧 Englisch](https://github.com/nlepage/templural#readme)
  - [🇫🇷 Französisch](https://github.com/nlepage/templural/blob/main/docs/README_fr.md)
- - [🇩🇪 Deutsch](https://github.com/nlepage/templural/blob/main/docs/README_de.md)
  
 ### Pluralregeln
 
