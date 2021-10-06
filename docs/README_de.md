@@ -302,7 +302,7 @@ Einige Sprachen können Standard-Fallbacks haben, siehe [locales.ts](https://git
 
 ### Was ist mit negativen Zahlen, Gleitkommazahlen oder anderen Werten?
 
-templural kümmert sich nicht darum, es verlässt sich auf [Intl.PluralRegeln](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules).
+templural kümmert sich nicht darum, es verlässt sich auf [Intl.PluralRules](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules).
 
 ### Sind neue Funktionen geplant?
 
