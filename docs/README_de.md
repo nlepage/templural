@@ -12,7 +12,6 @@
 
 [![README auf Englisch](https://img.shields.io/badge/🇬🇧-README-blue)](https://github.com/nlepage/templural#readme)
 [![README auf Französisch](https://img.shields.io/badge/🇫🇷-README-blue)](https://github.com/nlepage/templural/blob/main/docs/README_fr.md)
-[![README auf Deutsch](https://img.shields.io/badge/🇩🇪-README-blue)](https://github.com/nlepage/templural/blob/main/docs/README_de.md)
 
 ## Verwendung
 
