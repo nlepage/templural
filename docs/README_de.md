@@ -6,6 +6,10 @@
 [![Version](https://img.shields.io/npm/v/templural.svg)](https://www.npmjs.com/package/templural)
 [![Lizenz: Apache-2.0](https://img.shields.io/badge/License-Apache2.0-yellow.svg)](https://spdx.org/licenses/Apache-2.0.html)
 
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 [![README auf Englisch](https://img.shields.io/badge/🇬🇧-README-blue)](https://github.com/nlepage/templural#readme)
 [![README auf Französisch](https://img.shields.io/badge/🇫🇷-README-blue)](https://github.com/nlepage/templural/blob/main/docs/README_fr.md)
 [![README auf Deutsch](https://img.shields.io/badge/🇩🇪-README-blue)](https://github.com/nlepage/templural/blob/main/docs/README_de.md)
