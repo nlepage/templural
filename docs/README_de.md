@@ -49,7 +49,7 @@ Das bedeutet, **dass Sie das von templural** verwendete Gebietsschema einstellen
 Entweder stellen Sie das Standardgebietsschema ein:
 
 ```js
-templural.setLocales('fr_BE') // French (Belgium)
+templural.setLocales('fr_BE') // Französisch (Belgien)
 ```
 
 oder erhalten Sie eine neue Vorlagenfunktion für ein bestimmtes Gebietsschema:
