@@ -42,7 +42,7 @@ const { templural } = require('templural')
 
 ### Wählen Sie locale
 
-templural verwendet [Intl.PluralRegeln](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules), um zu wissen, welche Pluralregel für eine bestimmte Zahl anzuwenden ist, und die Pluralregeln variieren je nach Sprache. 
+templural verwendet [Intl.PluralRules](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules), um zu wissen, welche Pluralregel für eine bestimmte Zahl anzuwenden ist, und die Pluralregeln variieren je nach Sprache. 
 
 Das bedeutet, **dass Sie das von templural** verwendete Gebietsschema einstellen müssen, um korrekte Sätze zu formatieren.
 
