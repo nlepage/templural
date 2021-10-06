@@ -144,7 +144,7 @@ Verwende `$2`, `$3` or `$n` um auf den zweiten, den dritten oder den n-ten inter
 In einigen Fällen kann eine assoziative Syntax verwendet werden, um leere Werte zu vermeiden:
 
 ```js
-templural`${nbDogs} Hund{e} bell{t;en} and ${nbCats} Katze{n} miau{t;en}`
+templural`${nbHunde} Hund{e} bell{t;en} and ${nbKatzen} Katze{n} miau{t;en}`
 
 // kann ersetzt werden durch
 
