@@ -57,7 +57,7 @@ oder erhalten Sie eine neue Vorlagenfunktion für ein bestimmtes Gebietsschema:
 ```js
 import { forLocales } from 'templural'
 
-const templuralDeCH = forLocales('de_CH') // German (Switzerland)
+const templuralDeCH = forLocales('de_CH') // Deutsch (Schweiz)
 ```
 
 Für weitere Informationen über die Werte, die von `templural.setLocales()` und `forLocales()` siehe [locales argument](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument).
