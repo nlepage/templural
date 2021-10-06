@@ -314,18 +314,33 @@ templural ist einfach und dumm, und so wird es wahrscheinlich auch bleiben.
 
 Benutzen Sie [Discussions tab](https://github.com/nlepage/templural/discussions).
 
-## Autoren und Mitwirkende
+## Contributors ✨
 
-Ein besonderer Dank geht an [Valentin Cocaud](https://github.com/EmrysMyrddin) und [Yoann Prot](https://github.com/Taranys) für ihre ursprüngliche Idee von templural.
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/SvA1"><img src="https://avatars.githubusercontent.com/u/19571875?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nicolas Lepage</b></sub></a><br /><a href="https://github.com/nlepage/templural/commits?author=nlepage" title="Author">✍️</a></td>
+  </tr>
+</table>
 
-👤 **Nicolas Lepage**
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
-* Twitter: [@njblepage](https://twitter.com/njblepage)
-* GitHub: [@nlepage](https://github.com/nlepage)
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/EmrysMyrddin"><img src="https://avatars.githubusercontent.com/u/3855602?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Valentin Cocaud</b></sub></a><br /><a href="#ideas-EmrysMyrddin" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/Taranys"><img src="https://avatars.githubusercontent.com/u/4621525?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Yoann Prot</b></sub></a><br /><a href="#ideas-Taranys" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/SvA1"><img src="https://avatars.githubusercontent.com/u/41849274?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Svetlana A.</b></sub></a><br /><a href="https://github.com/nlepage/templural/commits?author=SvA1" title="Documentation">📖</a></td>
+  </tr>
+</table>
 
-👩 **SvA1**
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
 
-* GitHub: [@SvA1](https://github.com/SvA1)
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 ## 🤝 Beitragen
 
