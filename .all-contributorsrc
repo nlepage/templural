@@ -4,7 +4,8 @@
     "docs/README_fr.md"
   ],
   "imageSize": 100,
-  "commit": false,
+  "commit": true,
+  "commitConvention": "gitmoji",
   "contributors": [
     {
       "login": "EmrysMyrddin",
