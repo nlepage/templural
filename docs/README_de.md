@@ -78,10 +78,10 @@ templural`Yoann und Valentin hatten ${nbIdeen} interessante Idee{n}`
 ### Beliebiger anderer Werte in den Text einfügen
 
 ```js
-templural`${userName} hat ${nbPunkten} Punkt{e}`
+templural`${benutzerName} hat ${nbPunkten} Punkt{e}`
 
-// userName = "Joe",   nbPunkte = 1    ➔ "Joe hat 1 Punkt"
-// userName = "Mario", nbPunkte = 1000 ➔ "Mario hat 1000 Punkte"
+// benutzerName = "Joe",   nbPunkte = 1    ➔ "Joe hat 1 Punkt"
+// benutzerName = "Mario", nbPunkte = 1000 ➔ "Mario hat 1000 Punkte"
 ```
 
 ### Mehrere Wörter der gleichen vorangehenden Zahl zuordnen
@@ -90,8 +90,8 @@ templural`${userName} hat ${nbPunkten} Punkt{e}`
 templural`Ich hatte ${nbBiere} Bier{e}, Liebling, ich schwöre`
 
 // nbBiere = 1 ➔ "Ich hatte nur 1 Bier, Liebling, ich schwöre"
-// nbBiere = 2 ➔ "Ich hatte nur 2 Biere, Liebling, ich schwöre"
-// nbBiere = 6 ➔ "Ich hatte nur 6 Biere, Liebling, ich schwöre"
+// nbBiere = 2 ➔ "Ich hatte nur 2 Bären, Liebling, ich schwöre"
+// nbBiere = 6 ➔ "Ich hatte nur 6 Bären, Liebling, ich schwöre"
 ```
 
 ### Mehrere Wörter jeweils einer anderen vorangehenden Zahl zuordnen
@@ -108,11 +108,11 @@ templural`Ich habe ${nbKarotten} Karotte{n} und ${nbKartoffeln} Kartoffel{n} gek
 ### Wörter mit einer anderen Form im Singular und Plural
 
 ```js
-templural`${nbVerbunden} {Person;Menschen} {ist;sind} verbunden`
+templural`${nbVerbunden} {Person;Personen} {ist;sind} verbunden`
 
 // nbVerbunden = 1   ➔ "1 Person ist verbunden"
-// nbVerbunden = 2   ➔ "2 Menschen sind verbunden"
-// nbVerbunden = 666 ➔ "666 Menschen sind verbunden"
+// nbVerbunden = 2   ➔ "2 Personen sind verbunden"
+// nbVerbunden = 666 ➔ "666 Personen sind verbunden"
 ```
 
 ### Mischen Sie alle vorherigen Beispiele
