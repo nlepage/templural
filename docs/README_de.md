@@ -97,7 +97,7 @@ templural`Ich hatte ${nbBiere} Bier{e}, Liebling, ich schwöre`
 ### Mehrere Wörter jeweils einer anderen vorangehenden Zahl zuordnen
 
 ```js
-templural`Ich habe ${nbKarotten} Karotte{n} and ${nbKartoffeln} Kartoffel{n} gekauft`
+templural`Ich habe ${nbKarotten} Karotte{n} und ${nbKartoffeln} Kartoffel{n} gekauft`
 
 // nbKarotten = 1, nbKartoffeln = 1 ➔ "Ich habe 1 Karotte und 1 Kartoffel gekauft."
 // nbKarotten = 1, nbKartoffeln = 3 ➔ "Ich habe 1 Karotte und 3 Kartoffeln gekauft."
