@@ -324,7 +324,7 @@ templural est simple et bête, et il va probablement le rester.
 
 Utilisez l'[onglet Discussions](https://github.com/nlepage/templural/discussions).
 
-## Contributeurs ✨
+## Contributors ✨
 
 <table>
   <tr>
