@@ -321,7 +321,7 @@ Benutzen Sie [Discussions tab](https://github.com/nlepage/templural/discussions)
   </tr>
 </table>
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Danke an diese wunderbaren Menschen ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
