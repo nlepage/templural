@@ -147,7 +147,7 @@ templural`${nbHunde} Hund{e} bell{t;en} and ${nbKatzen} Katze{n} miau{t;en}`
 
 // kann ersetzt werden durch
 
-templural`${nbHunde} Hund{e} bell{one:t;many:en} and ${nbKatzen} Katze{n} miau{one:t;many:en}`
+templural`${nbHunde} Hund{e} bell{one:t;other:en} and ${nbKatzen} Katze{n} miau{one:t;other:en}`
 ```
 
 **⚠️ Die assoziative Syntax darf nicht mit der geordneten Syntax vermischt werden:**
