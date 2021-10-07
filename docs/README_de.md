@@ -158,7 +158,7 @@ templural`${nbHunde} Hund{e} bell{one:t;other:en} and ${nbKatzen} Katze{n} miau{
 templural`${nbVerbunden} {one:Person;other:Menschen} verbunden`
 
 // das ist NICHT OK:
-templural`${nbVerbunden} {one:Person;Menschen} verbunden`
+templural`${nbVerbunden} {one:Person;Personen} verbunden`
 ```
 
 ## 🗣️ Internationalisierung
