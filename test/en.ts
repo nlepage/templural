@@ -12,9 +12,8 @@ test('Match a word to a preceding number', t => {
 })
 
 test('Insert any other values in the text', t => {
-  const user = 'Mario'
-  t.is(templural`${user} has ${1} point{s}`, 'Mario has 1 point')
-  t.is(templural`${user} has ${1024} point{s}`, 'Mario has 1024 points')
+  t.is(templural`${"Joe"} has ${1} point{s}`, 'Joe has 1 point')
+  t.is(templural`${"Mario"} has ${1024} point{s}`, 'Mario has 1024 points')
 })
 
 test('Match several words to the same preceding number', t => {

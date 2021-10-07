@@ -86,7 +86,7 @@ templural`${benutzerName} hat ${nbPunkten} Punkt{e}`
 ### Mehrere Wörter der gleichen vorangehenden Zahl zuordnen
 
 ```js
-templural`Ich hatte ${nbBiere} Bier{e}, Liebling{e}, ich schwöre{n}`
+templural`Ich hatte nur ${nbBiere} Bier{e}, Liebling{e}, ich schwöre{n}`
 
 // nbBiere = 1 ➔ "Ich hatte nur 1 Bier, Liebling, ich schwöre"
 // nbBiere = 2 ➔ "Ich hatte nur 2 Biere, Lieblinge, ich schwören"
@@ -107,7 +107,7 @@ templural`Ich habe ${nbKarotten} Karotte{n} und ${nbKartoffeln} Kartoffel{n} gek
 ### Wörter mit einer anderen Form im Singular und Plural
 
 ```js
-templural`${nbVerbunden} {Person;Personen} {ist;sind} verbunden`
+templural`${nbVerbunden} Person{en} {ist;sind} verbunden`
 
 // nbVerbunden = 1   ➔ "1 Person ist verbunden"
 // nbVerbunden = 2   ➔ "2 Personen sind verbunden"
@@ -117,7 +117,7 @@ templural`${nbVerbunden} {Person;Personen} {ist;sind} verbunden`
 ### Mischen Sie alle vorherigen Beispiele
 
 ```js
-templural`${nbHunde} Hund{e} bell{t;en} and ${nbKatzen} Katze{n} miau{t;en}`
+templural`${nbHunde} Hund{e} bell{t;en} und ${nbKatzen} Katze{n} miau{t;en}`
 
 // nbHunde = 1, nbKatzen = 1 ➔ "1 Hund bellt und 1 Katze miaut"
 // nbHunde = 2, nbKatzen = 1 ➔ "2 Hunde bellen und 1 Katze miaut"
