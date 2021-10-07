@@ -1,6 +1,7 @@
 {
   "files": [
     "README.md",
+    "docs/README_de.md",
     "docs/README_fr.md"
   ],
   "imageSize": 100,
@@ -31,7 +32,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/41849274?v=4",
       "profile": "https://github.com/SvA1",
       "contributions": [
-        "doc"
+        "doc",
+        "translation"
       ]
     }
   ],
