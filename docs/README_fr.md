@@ -11,6 +11,7 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![README en anglais](https://img.shields.io/badge/🇬🇧-README-blue)](https://github.com/nlepage/templural#readme)
+[![README en allemand](https://img.shields.io/badge/🇩🇪-README-blue)](https://github.com/nlepage/templural/blob/main/docs/README_de.md)
 
 ## Utilisation
 
@@ -175,6 +176,7 @@ templural est construit sur la base de [Intl.PluralRules](https://developer.mozi
 Ce README est disponible dans les langues suivantes :
 
  - [🇬🇧 Anglais](https://github.com/nlepage/templural#readme)
+ - [🇩🇪 Allemand](https://github.com/nlepage/templural/blob/main/docs/README_de.md)
 
 ### Règles d'accord
 
