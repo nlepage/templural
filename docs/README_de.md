@@ -86,11 +86,11 @@ templural`${benutzerName} hat ${nbPunkten} Punkt{e}`
 ### Mehrere Wörter der gleichen vorangehenden Zahl zuordnen
 
 ```js
-templural`Ich hatte ${nbBiere} Bier{e}, Liebling, ich schwöre`
+templural`Ich hatte ${nbBiere} Bier{e}, Liebling{e}, ich schwöre{n}`
 
 // nbBiere = 1 ➔ "Ich hatte nur 1 Bier, Liebling, ich schwöre"
-// nbBiere = 2 ➔ "Ich hatte nur 2 Bären, Liebling, ich schwöre"
-// nbBiere = 6 ➔ "Ich hatte nur 6 Bären, Liebling, ich schwöre"
+// nbBiere = 2 ➔ "Ich hatte nur 2 Biere, Lieblinge, ich schwören"
+// nbBiere = 6 ➔ "Ich hatte nur 6 Biere, Lieblinge, ich schwören"
 ```
 
 ### Mehrere Wörter jeweils einer anderen vorangehenden Zahl zuordnen
