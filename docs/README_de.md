@@ -155,7 +155,7 @@ templural`${nbHunde} Hund{e} bell{one:t;other:en} and ${nbKatzen} Katze{n} miau{
 ```js
 // das ist OK:
 
-templural`${nbVerbunden} {one:Person;other:Menschen} verbunden`
+templural`${nbVerbunden} {one:Person;other:Personen} verbunden`
 
 // das ist NICHT OK:
 templural`${nbVerbunden} {one:Person;Personen} verbunden`
