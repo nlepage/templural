@@ -360,7 +360,7 @@ Afin de favoriser un environnement ouvert et accueillant, nous avons adopté [un
 
 ## Montrez votre soutien
 
-Lachez une ⭐️ et/ou sponsororisez si ce projet vous a aidé !
+Lachez une ⭐️ et/ou sponsorisez si ce projet vous a aidé !
 
 ## 📝 Licence
 
