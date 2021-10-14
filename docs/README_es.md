@@ -59,3 +59,5 @@ const templuralDeCH = forLocales('de_CH') // German (Switzerland)
 ```
  
 Para obtener más información sobre los valores aceptados por `templural.setLocales()` y `forLocales()` ver [argumento locales](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales).
+
+Los ejemplos siguintos estan especificos en espagnol, ver [Internacionalización](#%EF%B8%8F-internacionalizacion) para las informaciones sobre los otros idiomas.
