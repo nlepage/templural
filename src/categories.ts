@@ -1,4 +1,4 @@
-import { LocalesOptions } from "./locales"
+import { CategoryFallback, LocalesOptions } from "./locales"
 
 const defaultCategoryPriority: readonly Intl.LDMLPluralRule[] = ['other', 'one', 'two', 'few', 'many', 'zero']
 
@@ -27,3 +27,9 @@ export function resolveCategoryOrders(
 }
 
 export type CategoryOrders = readonly (readonly Intl.LDMLPluralRule[])[]
+
+export type CategoriesConfiguration = {
+  readonly categories: readonly Intl.LDMLPluralRule[]
+  readonly categoryOrders: CategoryOrders
+  readonly categoryFallback: CategoryFallback
+}
