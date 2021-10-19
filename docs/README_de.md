@@ -69,9 +69,9 @@ Die folgenden Beispiele sind spezifisch für die deutsche Sprache, siehe [Intern
 templural`Yoann und Valentin hatten ${nbIdeen} interessante Idee{n}`
 
 // nbIdeen = 1  ➔ "Yoann und Valentin hatten 1 interessante Idee"
-// nbIdeen = 2  ➔ "Yoann and Valentin hatten 2 interessante Ideen"
+// nbIdeen = 2  ➔ "Yoann und Valentin hatten 2 interessante Ideen"
 // nbIdeen = 42 ➔ "Yoann und Valentin hatten 42 interessante Ideen"
-// nbIdeen = 0  ➔ "Yoann and Valentin hatten 0 interessante Ideen"
+// nbIdeen = 0  ➔ "Yoann und Valentin hatten 0 interessante Ideen"
 ```
 
 ### Beliebiger anderer Werte in den Text einfügen
