@@ -69,9 +69,9 @@ Die folgenden Beispiele sind spezifisch für die deutsche Sprache, siehe [Intern
 templural`Yoann und Valentin hatten ${nbIdeen} interessante Idee{n}`
 
 // nbIdeen = 1  ➔ "Yoann und Valentin hatten 1 interessante Idee"
-// nbIdeen = 2  ➔ "Yoann and Valentin hatten 2 interessante Ideen"
+// nbIdeen = 2  ➔ "Yoann und Valentin hatten 2 interessante Ideen"
 // nbIdeen = 42 ➔ "Yoann und Valentin hatten 42 interessante Ideen"
-// nbIdeen = 0  ➔ "Yoann and Valentin hatten 0 interessante Ideen"
+// nbIdeen = 0  ➔ "Yoann und Valentin hatten 0 interessante Ideen"
 ```
 
 ### Beliebiger anderer Werte in den Text einfügen
@@ -143,11 +143,11 @@ Verwende `$2`, `$3` or `$n` um auf den zweiten, den dritten oder den n-ten inter
 In einigen Fällen kann eine assoziative Syntax verwendet werden, um leere Werte zu vermeiden:
 
 ```js
-templural`${nbHunde} Hund{e} bell{t;en} and ${nbKatzen} Katze{n} miau{t;en}`
+templural`${nbHunde} Hund{e} bell{t;en} und ${nbKatzen} Katze{n} miau{t;en}`
 
 // kann ersetzt werden durch
 
-templural`${nbHunde} Hund{e} bell{one:t;other:en} and ${nbKatzen} Katze{n} miau{one:t;other:en}`
+templural`${nbHunde} Hund{e} bell{one:t;other:en} und ${nbKatzen} Katze{n} miau{one:t;other:en}`
 ```
 
 **⚠️ Die assoziative Syntax darf nicht mit der geordneten Syntax vermischt werden:**
@@ -225,10 +225,10 @@ Dann:
 // die Angabe nur eines Wertes ist für die Kategorie many
 templural`${n} ist {many}`
 
-// die Angabe von zwei Werten ist für die Kategorien other and many
+// die Angabe von zwei Werten ist für die Kategorien other und many
 templural`${n} ist {other;many}`
 
-// die Angabe von zwei Werten ist für die Kategorien one, other and many
+// die Angabe von zwei Werten ist für die Kategorien one, other und many
 templural`${n} ist {one;other;many}`
 ```
 
@@ -292,7 +292,7 @@ Zum Beispiel im Französischen, `many` verhält sich wie eine Unterkategorie von
 
 ```js
 templural`${1000000} ist {one;other;many} und fällt zurück auf {one;other}`
-// ➔ "1000000 ist many and fällt zurück auf other"
+// ➔ "1000000 ist many und fällt zurück auf other"
 ```
 
 Einige Sprachen können Standard-Fallbacks haben, siehe [locales.ts](https://github.com/nlepage/templural/blob/main/src/locales.ts).
