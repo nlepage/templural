@@ -30,10 +30,10 @@ test('lex', t => {
     Token.Type.Dollar,
   ])
 
-  t.deepEqual(lex('Here is an integer:123456789;'), [
-    Token.string('Here is an integer'),
+  t.deepEqual(lex('Here is 1 integer:1234567890;'), [
+    Token.string('Here is 1 integer'),
     Token.Type.Colon,
-    Token.integer(123456789),
+    Token.integer(1234567890),
     Token.Type.SColon,
   ])
 
@@ -43,8 +43,19 @@ test('lex', t => {
     Token.string('123abc.'),
   ])
 
-  t.deepEqual(lex('This string contains some escaped chars \\{ \\} \\; \\$ \\: \\\\ \\a \\b \\n'), [
-    Token.string('This string contains some escaped chars { } ; $ : \\ a b n'),
+  t.deepEqual(lex('456 This string started with digits'), [
+    Token.string('456 This string started with digits'),
+  ])
+
+  t.deepEqual(lex('This is not an integer{0123}'), [
+    Token.string('This is not an integer'),
+    Token.Type.LCurly,
+    Token.string('0123'),
+    Token.Type.RCurly,
+  ])
+
+  t.deepEqual(lex('This string contains some escaped chars \\{\\}\\;\\$\\:\\\\\\\\\\a\\b\\n'), [
+    Token.string('This string contains some escaped chars {};$:\\\\abn'),
   ])
 
   t.deepEqual(lex('\\{This string started with an escaped char'), [
@@ -56,5 +67,9 @@ test('lex', t => {
     Token.Type.LCurly,
     Token.string('Escaped char followed by special char {'),
     Token.Type.LCurly,
+  ])
+
+  t.deepEqual(lex('Trailing backslash is kept \\'), [
+    Token.string('Trailing backslash is kept \\'),
   ])
 })
