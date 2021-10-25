@@ -1,11 +1,7 @@
 export type Token = (
   [Token.Type.String, String] |
   [Token.Type.Integer, Number] |
-  Token.Type.LCurly |
-  Token.Type.RCurly |
-  Token.Type.Semicolon |
-  Token.Type.Dollar |
-  Token.Type.Colon
+  Token.SpecialChar
 )
 
 export namespace Token {
@@ -14,10 +10,18 @@ export namespace Token {
     Integer = 'Integer',
     LCurly = '{',
     RCurly = '}',
-    Semicolon = ';',
+    SColon = ';',
     Dollar = '$',
     Colon = ':',
   }
+
+  export type SpecialChar = (
+    Token.Type.LCurly |
+    Token.Type.RCurly |
+    Token.Type.SColon |
+    Token.Type.Dollar |
+    Token.Type.Colon
+  )
 
   export function string(s: String): [Type.String, String] {
     return [Type.String, s]
@@ -43,23 +47,30 @@ class Lexer implements IterableIterator<Token> {
 
   next(): IteratorResult<Token> {
     switch (this.ch) {
-    case undefined:
-      return { done: true, value: null }
+    case undefined: return { done: true, value: null }
+    case '{': return { value: this.readSpecialChar(Token.Type.LCurly) }
+    case '}': return { value: this.readSpecialChar(Token.Type.RCurly) }
+    case ';': return { value: this.readSpecialChar(Token.Type.SColon) }
+    case '$': return { value: this.readSpecialChar(Token.Type.Dollar) }
+    case ':': return { value: this.readSpecialChar(Token.Type.Colon) }
     default:
-      return this.readString()
+      return { value: this.readString() }
     }
   }
 
-  readString(): IteratorResult<Token> {
+  readSpecialChar(type: Token.SpecialChar): Token {
+    this.nextPos()
+    return type
+  }
+
+  readString(): Token {
     const { pos } = this
 
     do {
       this.nextPos()
     } while(this.ch !== undefined)
 
-    return {
-      value: Token.string(this.source.slice(pos, this.pos))
-    }
+    return Token.string(this.source.slice(pos, this.pos))
   }
 
   nextPos() {
