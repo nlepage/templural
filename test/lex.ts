@@ -29,4 +29,10 @@ test('lex', t => {
     Token.string(', '),
     Token.Type.Dollar,
   ])
+
+  t.deepEqual(lex('Here is an integer:123456789'), [
+    Token.string('Here is an integer'),
+    Token.Type.Colon,
+    Token.integer(123456789),
+  ])
 })

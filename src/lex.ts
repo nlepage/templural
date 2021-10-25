@@ -58,12 +58,19 @@ class Lexer implements IterableIterator<Token> {
       return { value }
     }
 
+    if (this.ch >= '1' && this.ch <= '9') return { value: this.readInteger() }
+
     return { value: this.readString() }
   }
 
-  readSpecialChar(type: Token.SpecialChar): Token {
-    this.nextPos()
-    return type
+  readInteger(): Token {
+    const { pos } = this
+
+    do {
+      this.nextPos()
+    } while (this.ch !== undefined && this.ch >= '0' && this.ch <= '9')
+
+    return Token.integer(Number(this.source.slice(pos, this.pos)))
   }
 
   readString(): Token {
