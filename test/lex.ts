@@ -43,7 +43,18 @@ test('lex', t => {
     Token.string('123abc.'),
   ])
 
-  t.deepEqual(lex('This string contains some escaped characters \\{ \\} \\; \\$ \\: \\\\'), [
-    Token.string('This string contains some escaped characters { } ; $ : \\'),
+  t.deepEqual(lex('This string contains some escaped chars \\{ \\} \\; \\$ \\: \\\\ \\a \\b \\n'), [
+    Token.string('This string contains some escaped chars { } ; $ : \\ a b n'),
+  ])
+
+  t.deepEqual(lex('\\{This string started with an escaped char'), [
+    Token.string('{This string started with an escaped char'),
+  ])
+
+  t.deepEqual(lex('\\{{Escaped char followed by special char \\{{'), [
+    Token.string('{'),
+    Token.Type.LCurly,
+    Token.string('Escaped char followed by special char {'),
+    Token.Type.LCurly,
   ])
 })

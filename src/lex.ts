@@ -77,11 +77,8 @@ class Lexer implements IterableIterator<Token> {
 
   readString(pos = this.pos): Token {
     do {
+      if (this.ch === '\\') this.nextPos()
       this.nextPos()
-      if (this.ch === '\\') {
-        this.nextPos()
-        this.nextPos()
-      }
     } while (this.ch !== undefined && !Token.isSpecialChar(this.ch))
 
     return Token.string(this.source.slice(pos, this.pos).replace(/\\(.)/g, '$1'))
