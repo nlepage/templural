@@ -23,6 +23,10 @@ export namespace Token {
     Token.Type.Colon
   )
 
+  export function isSpecialChar(char: string): char is SpecialChar {
+    return char === Token.Type.LCurly || char === Token.Type.RCurly || char === Token.Type.SColon || char === Token.Type.Dollar || char === Token.Type.Colon
+  }
+
   export function string(s: String): [Type.String, String] {
     return [Type.String, s]
   }
@@ -46,16 +50,15 @@ class Lexer implements IterableIterator<Token> {
   }
 
   next(): IteratorResult<Token> {
-    switch (this.ch) {
-    case undefined: return { done: true, value: null }
-    case '{': return { value: this.readSpecialChar(Token.Type.LCurly) }
-    case '}': return { value: this.readSpecialChar(Token.Type.RCurly) }
-    case ';': return { value: this.readSpecialChar(Token.Type.SColon) }
-    case '$': return { value: this.readSpecialChar(Token.Type.Dollar) }
-    case ':': return { value: this.readSpecialChar(Token.Type.Colon) }
-    default:
-      return { value: this.readString() }
+    if (this.ch === undefined) return { done: true, value: null }
+
+    if (Token.isSpecialChar(this.ch)) {
+      const value = this.ch
+      this.nextPos()
+      return { value }
     }
+
+    return { value: this.readString() }
   }
 
   readSpecialChar(type: Token.SpecialChar): Token {
@@ -68,7 +71,7 @@ class Lexer implements IterableIterator<Token> {
 
     do {
       this.nextPos()
-    } while(this.ch !== undefined)
+    } while (this.ch !== undefined && !Token.isSpecialChar(this.ch))
 
     return Token.string(this.source.slice(pos, this.pos))
   }
