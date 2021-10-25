@@ -10,8 +10,8 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-[![README auf Englisch](https://img.shields.io/badge/🇬🇧-README-blue)](https://github.com/nlepage/templural#readme)
-[![README auf Französisch](https://img.shields.io/badge/🇫🇷-README-blue)](https://github.com/nlepage/templural/blob/main/docs/README_fr.md)
+[![English README](https://img.shields.io/badge/🇬🇧-README-blue)](https://github.com/nlepage/templural#readme)
+[![README en Français](https://img.shields.io/badge/🇫🇷-README-blue)](https://github.com/nlepage/templural/blob/main/docs/README_fr.md)
 
 ## Verwendung
 
@@ -167,8 +167,8 @@ templural ist auf [Intl.PluralRules](https://developer.mozilla.org/de/docs/Web/J
 
 Diese README ist in den folgenden anderen Sprachen verfügbar:
 
- - [🇬🇧 Englisch](https://github.com/nlepage/templural#readme)
- - [🇫🇷 Französisch](https://github.com/nlepage/templural/blob/main/docs/README_fr.md)
+ - [🇬🇧 English](https://github.com/nlepage/templural#readme)
+ - [🇫🇷 Français](https://github.com/nlepage/templural/blob/main/docs/README_fr.md)
  
 ### Pluralregeln
 
