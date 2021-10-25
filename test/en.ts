@@ -45,6 +45,6 @@ test('Match several words with several preceding numbers', t => {
 })
 
 test('Match a word to a non preceding number', t => {
-  t.is(templural`There {$1;is;are} ${1} flying whale{s}`, 'There is 1 flying whale')
-  t.is(templural`There {$1;is;are} ${2} flying whale{s}`, 'There are 2 flying whales')
+  t.is(templural`There {1$is;are} ${1} flying whale{s}`, 'There is 1 flying whale')
+  t.is(templural`There {1$is;are} ${2} flying whale{s}`, 'There are 2 flying whales')
 })

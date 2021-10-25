@@ -42,8 +42,8 @@ test('Un mélange de tous les exemples précédents', t => {
 })
 
 test('Accorder un mot avec un nombre ne le précédant pas', t => {
-  t.is(templural`Dans le ciel vole{$1;nt} ${1} baleine{s}`, 'Dans le ciel vole 1 baleine')
-  t.is(templural`Dans le ciel vole{$1;nt} ${2} baleine{s}`, 'Dans le ciel volent 2 baleines')
+  t.is(templural`Dans le ciel vole{1$nt} ${1} baleine{s}`, 'Dans le ciel vole 1 baleine')
+  t.is(templural`Dans le ciel vole{1$nt} ${2} baleine{s}`, 'Dans le ciel volent 2 baleines')
 })
 
 test('Accorder avec des grands nombres', t => {
