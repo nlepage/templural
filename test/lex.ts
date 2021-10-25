@@ -30,9 +30,20 @@ test('lex', t => {
     Token.Type.Dollar,
   ])
 
-  t.deepEqual(lex('Here is an integer:123456789'), [
+  t.deepEqual(lex('Here is an integer:123456789;'), [
     Token.string('Here is an integer'),
     Token.Type.Colon,
     Token.integer(123456789),
+    Token.Type.SColon,
+  ])
+
+  t.deepEqual(lex('Here is a string starting with digits:123abc.'), [
+    Token.string('Here is a string starting with digits'),
+    Token.Type.Colon,
+    Token.string('123abc.'),
+  ])
+
+  t.deepEqual(lex('This string contains some escaped characters \\{ \\} \\; \\$ \\: \\\\'), [
+    Token.string('This string contains some escaped characters { } ; $ : \\'),
   ])
 })

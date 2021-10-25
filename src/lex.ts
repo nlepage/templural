@@ -70,17 +70,21 @@ class Lexer implements IterableIterator<Token> {
       this.nextPos()
     } while (this.ch !== undefined && this.ch >= '0' && this.ch <= '9')
 
+    if (!Token.isSpecialChar(this.ch)) return this.readString(pos)
+
     return Token.integer(Number(this.source.slice(pos, this.pos)))
   }
 
-  readString(): Token {
-    const { pos } = this
-
+  readString(pos = this.pos): Token {
     do {
       this.nextPos()
+      if (this.ch === '\\') {
+        this.nextPos()
+        this.nextPos()
+      }
     } while (this.ch !== undefined && !Token.isSpecialChar(this.ch))
 
-    return Token.string(this.source.slice(pos, this.pos))
+    return Token.string(this.source.slice(pos, this.pos).replace(/\\(.)/g, '$1'))
   }
 
   nextPos() {
