@@ -28,65 +28,27 @@ class Parser implements IterableIterator<Template.Chunk | Template.Group> {
     return { value: this.readChunk() }
   }
 
-  readGroup(): Template.Group {
+  readGroup(): Template.Group | Template.Chunk {
+    const { pos } = this
+
     this.nextPos()
 
-    let argIndex = this.defaultArgIndex
+    const argIndex = this.readArgIndex()
 
-    if (Token.isInteger(this.token) && this.nextToken === Token.Type.Dollar) {
-      argIndex = Number(this.token[1]) - 1
-      this.nextPos()
-      this.nextPos()
-    }
-
-    return Token.isString(this.token) && this.nextToken === Token.Type.Colon
-      ? this.readAssociativeGroup(argIndex)
-      : this.readOrderedGroup(argIndex)
-  }
-
-  readOrderedGroup(argIndex: number): Template.OrderedGroup {
     const orderedResults: string[] = []
-
-    let result = ''
-    do {
-      if (this.token === Token.Type.SColon) {
-        orderedResults.push(result)
-        result = ''
-      } else {
-        result += Token.isString(this.token) || Token.isInteger(this.token)
-          ? this.token[1]
-          : this.token
-      }
-
-      this.nextPos()
-    } while (this.token !== Token.Type.RCurly && this.token !== undefined)
-
-    if (this.token === undefined) throw new SyntaxError('unexpected end of chunk')
-
-    orderedResults.push(result)
-
-    this.nextPos()
-
-    return { argIndex, orderedResults }
-  }
-
-  readAssociativeGroup(argIndex: number): Template.AssociativeGroup {
     const associativeResults: { [key in Intl.LDMLPluralRule]?: string } = {}
 
     while (true) {
       const category = this.readCategory()
+      const result = this.readResult()
 
-      let result = ''
-      while (this.token !== Token.Type.SColon && this.token !== Token.Type.RCurly && this.token !== undefined) {
-        result += Token.isString(this.token) || Token.isInteger(this.token)
-          ? this.token[1]
-          : this.token
-        this.nextPos()
+      if (category == null) {
+        orderedResults.push(result)
+      } else {
+        associativeResults[category] = result
       }
 
-      if (this.token === undefined) throw new SyntaxError('unexpected end of chunk')
-
-      associativeResults[category] = result
+      if (this.token === undefined) return this.readChunk(pos)
 
       if (this.token === Token.Type.RCurly) break
 
@@ -95,31 +57,49 @@ class Parser implements IterableIterator<Template.Chunk | Template.Group> {
 
     this.nextPos()
 
-    return { argIndex, associativeResults }
+    if (Object.keys(associativeResults).length !== 0) {
+      if (orderedResults.length !== 0) throw SyntaxError('Ordered and associative syntaxes cannot be mixed')
+
+      return { argIndex, associativeResults }
+    }
+
+    return { argIndex, orderedResults }
+  }
+
+  readArgIndex() {
+    if (!Token.isInteger(this.token) || this.nextToken !== Token.Type.Dollar) return this.defaultArgIndex
+
+    const argIndex = Number(this.token[1]) - 1
+    this.nextPos()
+    this.nextPos()
+    return argIndex
   }
 
   readCategory() {
-    const category = this.readCategoryName()
-
-    if (this.token !== Token.Type.Colon) throw new SyntaxError(`expected colon, got "${Token.toString(this.token)}"`)
-    this.nextPos()
-
-    return category
-  }
-
-  readCategoryName() {
-    if (!Token.isString(this.token) || !isLDMLPluralRule(this.token[1])) throw new SyntaxError(`expected category name, got "${Token.toString(this.token)}"`)
+    if (!Token.isString(this.token) || !isLDMLPluralRule(this.token[1]) || this.nextToken !== Token.Type.Colon) return null
     const category = this.token[1]
     this.nextPos()
+    this.nextPos()
     return category
   }
 
-  readChunk(): Template.Chunk {
+  readResult() {
     const { pos } = this
 
+    while (this.token !== undefined && this.token !== Token.Type.RCurly && this.token !== Token.Type.SColon) {
+      this.nextPos()
+    }
+
+    return this.tokens
+      .slice(pos, this.pos)
+      .map(token => Token.isString(token) || Token.isInteger(token) ? token[1] : token)
+      .join('')
+  }
+
+  readChunk(pos = this.pos): Template.Chunk {
     do {
       this.nextPos()
-    } while (this.token !== Token.Type.LCurly && this.token !== undefined)
+    } while (this.token !== Token.Type.LCurly && this.token != null)
 
     return this.tokens
       .slice(pos, this.pos)
