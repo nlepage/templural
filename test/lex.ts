@@ -33,7 +33,7 @@ test('lex', t => {
   t.deepEqual(lex('Here is 1 integer:1234567890;'), [
     Token.string('Here is 1 integer'),
     Token.Type.Colon,
-    Token.integer(1234567890),
+    Token.integer('1234567890'),
     Token.Type.SColon,
   ])
 

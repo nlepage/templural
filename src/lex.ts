@@ -1,6 +1,6 @@
 export type Token = (
   [Token.Type.String, string] |
-  [Token.Type.Integer, number] |
+  [Token.Type.Integer, string] |
   Token.SpecialChar
 )
 
@@ -27,19 +27,19 @@ export namespace Token {
     return char === Token.Type.LCurly || char === Token.Type.RCurly || char === Token.Type.SColon || char === Token.Type.Dollar || char === Token.Type.Colon
   }
 
-  export function string(s: string): [Type.String, string] {
-    return [Type.String, s]
+  export function string(value: string): [Type.String, string] {
+    return [Type.String, value]
   }
 
   export function isString(token: Token): token is [Type.String, string] {
     return Array.isArray(token) && token[0] === Type.String
   }
 
-  export function integer(n: number): [Type.Integer, number] {
-    return [Type.Integer, n]
+  export function integer(value: string): [Type.Integer, string] {
+    return [Type.Integer, value]
   }
 
-  export function isInteger(token: Token): token is [Type.Integer, number] {
+  export function isInteger(token: Token): token is [Type.Integer, string] {
     return Array.isArray(token) && token[0] === Type.Integer
   }
 
@@ -86,7 +86,7 @@ class Lexer implements IterableIterator<Token> {
 
     if (!Token.isSpecialChar(this.ch)) return this.readString(pos)
 
-    return Token.integer(Number(this.source.slice(pos, this.pos)))
+    return Token.integer(this.source.slice(pos, this.pos))
   }
 
   readString(pos = this.pos): Token {

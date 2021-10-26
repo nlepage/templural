@@ -24,12 +24,12 @@ test.failing('Plural substitution in template args should not be resolved', t =>
 
 test.failing('Ordered and associative syntaxes cannot be mixed', t => {
   t.throws(() => templural`${0}{test;one:test}`, {
-    instanceOf: Error,
+    instanceOf: SyntaxError,
     message: 'Ordered and associative syntaxes cannot be mixed',
   })
 
   t.throws(() => templural`${0}{one:test;test}`, {
-    instanceOf: Error,
+    instanceOf: SyntaxError,
     message: 'Ordered and associative syntaxes cannot be mixed',
   })
 })

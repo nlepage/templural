@@ -34,7 +34,7 @@ class Parser implements IterableIterator<Template.Chunk | Template.Group> {
     let argIndex = this.defaultArgIndex
 
     if (Token.isInteger(this.token) && this.nextToken === Token.Type.Dollar) {
-      argIndex = this.token[1] - 1
+      argIndex = Number(this.token[1]) - 1
       this.nextPos()
       this.nextPos()
     }
