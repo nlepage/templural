@@ -115,16 +115,16 @@ class Parser implements IterableIterator<Template.Chunk | Template.Group> {
   }
 
   readChunk(): Template.Chunk {
-    let chunk = ''
+    const { pos } = this
 
     do {
-      chunk += Token.isString(this.token) || Token.isInteger(this.token)
-        ? this.token[1]
-        : this.token
       this.nextPos()
     } while (this.token !== Token.Type.LCurly && this.token !== undefined)
 
-    return chunk
+    return this.tokens
+      .slice(pos, this.pos)
+      .map(token => Token.isString(token) || Token.isInteger(token) ? token[1] : token)
+      .join('')
   }
 
   nextPos() {
