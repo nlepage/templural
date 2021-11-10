@@ -2,6 +2,8 @@ import test from 'ava'
 
 import { templural, forLocales } from '../src'
 
+test.before(() => { templural.setLocales('en') })
+
 test('No number', t => {
   t.is(templural`This is useless`, 'This is useless')
   t.is(templural`This is a test{s}`, 'This is a test')
@@ -40,6 +42,10 @@ test('Incomplete groups', t => {
   t.is(templural`This is a test{s}a}`, 'This is a testa}')
 })
 
+test('Associative syntax with wrong rule name', t => {
+  t.is(templural`${2} {aze:rty}`, '2 aze:rty')
+})
+
 test('Escaping special chars', t => {
   t.is(templural`This is a test\\{s}`, 'This is a test{s}')
   t.is(templural`This is a test\\\\{s}`, 'This is a test\\')
@@ -47,12 +53,13 @@ test('Escaping special chars', t => {
   t.is(templural`This is a test\\\\\\\\{s}`, 'This is a test\\\\')
   t.is(templural`This is a test\\\\\\\\\\{s}`, 'This is a test\\\\{s}')
   t.is(templural`This is a test\\\\\\\\\\\\{s}`, 'This is a test\\\\\\')
-
-  t.is(templural`This is a test\\{s`, 'This is a test{s')
-
-  t.is(templural`This is a test{s\\}}`, 'This is a test')
-
-  // FIXME add more
+  t.is(templural`This is a test\\{s}`, 'This is a test{s}')
+  t.is(templural`${2} {s\\}}`, '2 s}')
+  t.is(templural`${1} {one\\;other}`, '1 ')
+  t.is(templural`${2} {one\\;other}`, '2 one;other')
+  t.is(templural`${1} {one\\:other}`, '1 ')
+  t.is(templural`${2} {one\\;other}`, '2 one;other')
+  t.is(templural`${2} {1\\$other}`, '2 1$other')
 })
 
 test('Fallback chain', t => {
