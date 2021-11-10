@@ -128,10 +128,10 @@ templural`${nbHunde} Hund{e} bell{t;en} und ${nbKatzen} Katze{n} miau{t;en}`
 ### Einem Wort eine *nicht vorangehende* Zahl zuordnen
 
 ```js
-templural`Die ${nbFrauen} nette{$1;n} Frau{en}`
+templural`Am Himmel flieg{$1;t;en} ${nbWale} Wal{e}`
 
-// nbFrauen = 1 ➔ "Die 1 nette Frau"
-// nbFrauen = 2 ➔ "Die 2 netten Frauen"
+// nbWale = 1 ➔ "Am Himmel fliegt 1 Wal"
+// nbWale = 2 ➔ "Am Himmel fliegen 2 Wale"
 ```
 
 `$1` verweist auf den ersten interpolierten Ausdruck.
