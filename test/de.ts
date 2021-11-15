@@ -43,6 +43,6 @@ test('Mischen Sie alle vorherigen Beispiele', t => {
 })
 
 test('Einem Wort eine nicht vorangehende Zahl zuordnen', t => {
-  t.is(templural`Die ${1} nette{$1;n} Frau{en}`, 'Die 1 nette Frau')
-  t.is(templural`Die ${2} nette{$1;n} Frau{en}`, 'Die 2 netten Frauen')
+  t.is(templural`Am Himmel flieg{$1;t;en} ${1} Wal{e}`, 'Am Himmel fliegt 1 Wal')
+  t.is(templural`Am Himmel flieg{$1;t;en} ${2} Wal{e}`, 'Am Himmel fliegen 2 Wale')
 })
