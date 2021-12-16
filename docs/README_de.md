@@ -128,15 +128,15 @@ templural`${nbHunde} Hund{e} bell{t;en} und ${nbKatzen} Katze{n} miau{t;en}`
 ### Einem Wort eine *nicht vorangehende* Zahl zuordnen
 
 ```js
-templural`Am Himmel flieg{$1;t;en} ${nbWale} Wal{e}`
+templural`Am Himmel flieg{1$t;en} ${nbWale} Wal{e}`
 
 // nbWale = 1 ➔ "Am Himmel fliegt 1 Wal"
 // nbWale = 2 ➔ "Am Himmel fliegen 2 Wale"
 ```
 
-`$1` verweist auf den ersten interpolierten Ausdruck.
+`1$` verweist auf den ersten interpolierten Ausdruck.
 
-Verwende `$2`, `$3` or `$n` um auf den zweiten, den dritten oder den n-ten interpolierten Ausdruck zu verweisen.
+Verwende `2$`, `3$` or `n$` um auf den zweiten, den dritten oder den n-ten interpolierten Ausdruck zu verweisen.
 
 ### Assoziative Syntax
 

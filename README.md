@@ -128,15 +128,15 @@ templural`${nbDogs} dog{s} bark{s;} and ${nbCats} cat{s} meow{s;}`
 ### Match a word to a *non preceding* number
 
 ```js
-templural`There {$1;is;are} ${nbWhales} flying whale{s}`
+templural`There {1$is;are} ${nbWhales} flying whale{s}`
 
 // nbWhales = 1 ➔ "There is 1 flying whale"
 // nbWhales = 2 ➔ "There are 2 flying whales"
 ```
 
-`$1` references the first interpolated expression.
+`1$` references the first interpolated expression.
 
-Use `$2`, `$3` or `$n` to reference the second, the third or the nth interpolated expression.
+Use `2$`, `3$` or `n$` to reference the second, the third or the nth interpolated expression.
 
 ### Associative syntax
 
