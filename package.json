@@ -22,10 +22,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig-cjs.json && tsc -p tsconfig-es.json",
-    "ci": "yarn install --frozen-lockfile && yarn test",
+    "build": "yarn clean && tsc -p tsconfig-cjs.json && tsc -p tsconfig-es.json",
     "clean": "rm -rf dist",
-    "prebuild": "yarn clean",
     "test": "ava"
   },
   "devDependencies": {
@@ -43,5 +41,6 @@
     "require": [
       "ts-node/register"
     ]
-  }
+  },
+  "packageManager": "yarn@3.1.1"
 }
