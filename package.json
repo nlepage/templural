@@ -1,7 +1,7 @@
 {
   "name": "templural",
-  "version": "1.0.0-beta.5",
-  "description": "🍤",
+  "version": "1.0.0",
+  "description": "Template function for plural-sensitive formatting",
   "main": "dist/cjs",
   "module": "dist/es",
   "repository": "https://github.com/nlepage/templural",
